@@ -43,5 +43,11 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Usuarios.Datos\Usuarios.Datos.csproj">
+      <Project>{463b1162-579e-4783-a50c-10f9efed2711}</Project>
+      <Name>Usuarios.Datos</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
