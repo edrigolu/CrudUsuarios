@@ -15,13 +15,12 @@ namespace Usuarios.Datos
         {
 
             comando.Connection = conexion.AbrirConexion();
-            comando.CommandText = "MostrarProductos";
+            comando.CommandText = "MostrarUsuarios";
             comando.CommandType = CommandType.StoredProcedure;
             leer = comando.ExecuteReader();
             tabla.Load(leer);
             conexion.CerrarConexion();
             return tabla;
-
         }
 
         public void Insertar(string nombre, string desc, string marca, double precio, int stock)
@@ -29,7 +28,7 @@ namespace Usuarios.Datos
             //PROCEDIMNIENTO
 
             comando.Connection = conexion.AbrirConexion();
-            comando.CommandText = "InsetarProductos";
+            comando.CommandText = "InsertarUsuario";
             comando.CommandType = CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("@nombre", nombre);
             comando.Parameters.AddWithValue("@descrip", desc);
@@ -47,7 +46,7 @@ namespace Usuarios.Datos
         {
 
             comando.Connection = conexion.AbrirConexion();
-            comando.CommandText = "EditarProductos";
+            comando.CommandText = "EditarUsuario";
             comando.CommandType = CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("@nombre", nombre);
             comando.Parameters.AddWithValue("@descrip", desc);
@@ -64,7 +63,7 @@ namespace Usuarios.Datos
         public void Eliminar(int id)
         {
             comando.Connection = conexion.AbrirConexion();
-            comando.CommandText = "EliminarProducto";
+            comando.CommandText = "EliminarUsuario";
             comando.CommandType = CommandType.StoredProcedure;
 
             comando.Parameters.AddWithValue("@idpro", id);
