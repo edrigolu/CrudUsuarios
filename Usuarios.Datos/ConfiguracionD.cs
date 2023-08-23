@@ -3,9 +3,9 @@ using System.Data;
 
 namespace Usuarios.Datos
 {
-    public class ConexionD
+    public class ConfiguracionD
     {
-        private readonly SqlConnection Conexion = new SqlConnection("Server=PC-EDRIGOLU\\SQLEXPRESS;DataBase= PruebaUsuarios;Integrated Security=true");
+        private readonly SqlConnection Conexion = new SqlConnection("Server=localhost;DataBase= PruebaUsuarios;Integrated Security=true");
 
         public SqlConnection AbrirConexion()
         {

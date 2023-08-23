@@ -5,72 +5,98 @@ namespace Usuarios.Datos
 {
     public class UsuarioD
     {
-        private ConexionD conexion = new ConexionD();
+        private readonly ConfiguracionD conexion = new ConfiguracionD();
 
-        SqlDataReader leer;
-        readonly DataTable tabla = new DataTable();
-        readonly SqlCommand comando = new SqlCommand();
+        SqlDataReader sqlDataReader;
+        readonly DataTable dataTable = new DataTable();
+        readonly SqlCommand sqlCommand = new SqlCommand();
 
         public DataTable Mostrar()
         {
-
-            comando.Connection = conexion.AbrirConexion();
-            comando.CommandText = "MostrarUsuarios";
-            comando.CommandType = CommandType.StoredProcedure;
-            leer = comando.ExecuteReader();
-            tabla.Load(leer);
+            sqlCommand.Connection = conexion.AbrirConexion();
+            sqlCommand.CommandText = "MostrarUsuarios";
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlDataReader = sqlCommand.ExecuteReader();
+            dataTable.Load(sqlDataReader);
             conexion.CerrarConexion();
-            return tabla;
+            return dataTable;
         }
 
-        public void Insertar(string nombre, string desc, string marca, double precio, int stock)
+        public void Insertar(string nombre,
+                             string apellido,
+                             int edad,
+                             int numeroDocumento,
+                             int idTipoDocumento,
+                             int idCiudadResidencia,
+                             int idDepartamentoResidencia,
+                             string direccion,
+                             int telefono,
+                             int celular,
+                             string correo,
+                             string ocupacion)
         {
-            //PROCEDIMNIENTO
-
-            comando.Connection = conexion.AbrirConexion();
-            comando.CommandText = "InsertarUsuario";
-            comando.CommandType = CommandType.StoredProcedure;
-            comando.Parameters.AddWithValue("@nombre", nombre);
-            comando.Parameters.AddWithValue("@descrip", desc);
-            comando.Parameters.AddWithValue("@Marca", marca);
-            comando.Parameters.AddWithValue("@precio", precio);
-            comando.Parameters.AddWithValue("@stock", precio);
-
-            comando.ExecuteNonQuery();
-
-            comando.Parameters.Clear();
-
+            //Procedimiento
+            sqlCommand.Connection = conexion.AbrirConexion();
+            sqlCommand.CommandText = "PA_CrearUsuario";
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@Nombre", nombre);
+            sqlCommand.Parameters.AddWithValue("@Apellido", apellido);
+            sqlCommand.Parameters.AddWithValue("@Edad", edad);
+            sqlCommand.Parameters.AddWithValue("@NumeroDocumento", numeroDocumento);
+            sqlCommand.Parameters.AddWithValue("@IdTipoDocumento", idTipoDocumento);
+            sqlCommand.Parameters.AddWithValue("@IdCiudadResidencia", idCiudadResidencia);
+            sqlCommand.Parameters.AddWithValue("@IdDepartamentoResidencia", idDepartamentoResidencia);
+            sqlCommand.Parameters.AddWithValue("@Direccion", direccion);
+            sqlCommand.Parameters.AddWithValue("@Telefono", telefono);
+            sqlCommand.Parameters.AddWithValue("@Celular", celular);
+            sqlCommand.Parameters.AddWithValue("@Correo", correo);
+            sqlCommand.Parameters.AddWithValue("@Ocupacion", ocupacion);
+            sqlCommand.ExecuteNonQuery();
+            sqlCommand.Parameters.Clear();
         }
 
-        public void Editar(string nombre, string desc, string marca, double precio, int stock, int id)
+        public void Editar(string nombre,
+                           string apellido,
+                           int edad,
+                           int numeroDocumento,
+                           int idTipoDocumento,
+                           int idCiudadResidencia,
+                           int idDepartamentoResidencia,
+                           string direccion,
+                           int telefono,
+                           int celular,
+                           string correo,
+                           string ocupacion,
+                           int idUsuario)
         {
-
-            comando.Connection = conexion.AbrirConexion();
-            comando.CommandText = "EditarUsuario";
-            comando.CommandType = CommandType.StoredProcedure;
-            comando.Parameters.AddWithValue("@nombre", nombre);
-            comando.Parameters.AddWithValue("@descrip", desc);
-            comando.Parameters.AddWithValue("@Marca", marca);
-            comando.Parameters.AddWithValue("@precio", precio);
-            comando.Parameters.AddWithValue("@stock", stock);
-            comando.Parameters.AddWithValue("@id", id);
-
-            comando.ExecuteNonQuery();
-
-            comando.Parameters.Clear();
+            sqlCommand.Connection = conexion.AbrirConexion();
+            sqlCommand.CommandText = "PA_EditarUsuario";
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@Nombre", nombre);
+            sqlCommand.Parameters.AddWithValue("@Apellido", apellido);
+            sqlCommand.Parameters.AddWithValue("@Edad", edad);
+            sqlCommand.Parameters.AddWithValue("@NumeroDocumento", numeroDocumento);
+            sqlCommand.Parameters.AddWithValue("@IdTipoDocumento", idTipoDocumento);
+            sqlCommand.Parameters.AddWithValue("@IdCiudadResidencia", idCiudadResidencia);
+            sqlCommand.Parameters.AddWithValue("@IdDepartamentoResidencia", idDepartamentoResidencia);
+            sqlCommand.Parameters.AddWithValue("@Direccion", direccion);
+            sqlCommand.Parameters.AddWithValue("@Telefono", telefono);
+            sqlCommand.Parameters.AddWithValue("@Celular", celular);
+            sqlCommand.Parameters.AddWithValue("@Correo", correo);
+            sqlCommand.Parameters.AddWithValue("@Ocupacion", ocupacion);
+            sqlCommand.Parameters.AddWithValue("@id", idUsuario);
+            sqlCommand.ExecuteNonQuery();
+            sqlCommand.Parameters.Clear();
         }
 
-        public void Eliminar(int id)
+        public void Eliminar(int idUsuario)
         {
-            comando.Connection = conexion.AbrirConexion();
-            comando.CommandText = "EliminarUsuario";
-            comando.CommandType = CommandType.StoredProcedure;
-
-            comando.Parameters.AddWithValue("@idpro", id);
-
-            comando.ExecuteNonQuery();
-
-            comando.Parameters.Clear();
+            sqlCommand.Connection = conexion.AbrirConexion();
+            sqlCommand.CommandText = "PA_EliminarUsuario";
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@IdUsuario", idUsuario);
+            sqlCommand.ExecuteNonQuery();
+            sqlCommand.Parameters.Clear();
         }
     }
 }

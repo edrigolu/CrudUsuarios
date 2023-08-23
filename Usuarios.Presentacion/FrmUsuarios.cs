@@ -18,11 +18,24 @@ namespace Usuarios.Presentacion
             txtFiltroApellido.Visible = false;
             lblFiltroNumDoc.Visible = false;
             txtFiltroNumDoc.Visible = false;
+        }      
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            lblFiltroNombre.Visible = false;
+            txtFiltroNombre.Visible = false;
+            lblFiltroApellido.Visible = false;
+            txtFiltroApellido.Visible = false;
+            lblFiltroNumDoc.Visible = false;
+            txtFiltroNumDoc.Visible = false;
+            rdbApellidos.Checked = false;
+            rdbNombre.Checked = false;
+            rdbNumDocumento.Checked = false;
         }
 
-        private void rdbNombre_CheckedChanged(object sender, EventArgs e)
+        private void rdbNombre_Click(object sender, EventArgs e)
         {
-            if (rdbNombre.Checked)
+            if(rdbNombre.Checked)
             {
                 lblFiltroNombre.Visible = true;
                 txtFiltroNombre.Visible = true;
@@ -33,40 +46,29 @@ namespace Usuarios.Presentacion
             }
         }
 
-        private void rdbApellidos_CheckedChanged(object sender, EventArgs e)
+        private void rdbApellidos_Click(object sender, EventArgs e)
         {
-            if (rdbApellidos.Checked)
-            {
-                lblFiltroApellido.Visible = true;
-                txtFiltroApellido.Visible = true;
+            if(rdbApellidos.Checked) {
                 lblFiltroNombre.Visible = false;
                 txtFiltroNombre.Visible = false;
+                lblFiltroApellido.Visible = true;
+                txtFiltroApellido.Visible = true;
                 lblFiltroNumDoc.Visible = false;
                 txtFiltroNumDoc.Visible = false;
             }
         }
 
-        private void rdbNumDocumento_CheckedChanged(object sender, EventArgs e)
+        private void rdbNumDocumento_Click(object sender, EventArgs e)
         {
             if (rdbNumDocumento.Checked)
             {
-                lblFiltroNumDoc.Visible = true;
-                txtFiltroNumDoc.Visible = true;
                 lblFiltroNombre.Visible = false;
                 txtFiltroNombre.Visible = false;
                 lblFiltroApellido.Visible = false;
                 txtFiltroApellido.Visible = false;
+                lblFiltroNumDoc.Visible = true;
+                txtFiltroNumDoc.Visible = true;
             }
-        }
-
-        private void btnLimpiar_Click(object sender, EventArgs e)
-        {
-            lblFiltroNombre.Visible = false;
-            txtFiltroNombre.Visible = false;
-            lblFiltroApellido.Visible = false;
-            txtFiltroApellido.Visible = false;
-            lblFiltroNumDoc.Visible = false;
-            txtFiltroNumDoc.Visible = false;
         }
     }
 }
