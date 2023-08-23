@@ -396,3 +396,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/Usuarios.Presentacion/Usuarios.cs
+/Usuarios.Presentacion/Usuarios.Designer.cs
+/Usuarios.Presentacion/Usuarios.resx
