@@ -45,6 +45,7 @@
     <Compile Include="Municipios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TiposDocumento.cs" />
+    <Compile Include="Usuario.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
