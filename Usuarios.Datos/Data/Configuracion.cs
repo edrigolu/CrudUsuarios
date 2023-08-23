@@ -2,6 +2,6 @@
 {
     public class Configuracion
     {
-        public static string conexion = "Data Source=localhost;Initial Catalog=PruebaUsuarios;Integrated Security=True";
+        public static string Conexion = "Data Source=localhost;Initial Catalog=PruebaUsuarios;Integrated Security=True";
     }
 }

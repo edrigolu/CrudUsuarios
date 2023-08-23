@@ -1,5 +1,6 @@
 ﻿using System;
 using Usuarios.Datos.Data;
+using Usuarios.Entidades;
 
 namespace Usuarios.Negocio
 {
@@ -7,16 +8,15 @@ namespace Usuarios.Negocio
     {
         private readonly Operaciones operaciones = new Operaciones();
 
-        //public DataTable MostrarUsuarios()
-        //{
-        //    DataTable tabla = new DataTable();
-        //    tabla = operaciones.Mostrar();
-        //    return tabla;
-        //}
-
+        
         public void MostrarDepartamentos()
         {
             operaciones.ObtenerDepartamentos();
+        }
+
+        public void MostrarUsuarios()
+        {
+            operaciones.ObtenerUsuarios();
         }
 
         public void ObtenerTipoDocumento()
@@ -24,65 +24,21 @@ namespace Usuarios.Negocio
             operaciones.ObtenerTipoDocumento();
         }
 
-        //public void Insertar(string nombre,
-        //                     string apellido,
-        //                     int edad,
-        //                     int numeroDocumento,
-        //                     int idTipoDocumento,
-        //                     int idCiudadResidencia,
-        //                     int idDepartamentoResidencia,
-        //                     string direccion,
-        //                     int telefono,
-        //                     int celular,
-        //                     string correo,
-        //                     string ocupacion)
-        //{
-        //    operaciones.Insertar(nombre,
-        //                    apellido,
-        //                    Convert.ToInt32(edad),
-        //                    Convert.ToInt32(numeroDocumento),
-        //                   Convert.ToInt32(idTipoDocumento),
-        //                    Convert.ToInt32(idCiudadResidencia),
-        //                    Convert.ToInt32(idDepartamentoResidencia),
-        //                    direccion,
-        //                    Convert.ToInt32(telefono),
-        //                    Convert.ToInt32(celular),
-        //                    correo,
-        //                    ocupacion);
-        //}
+        public void Insertar()
+        {
+            Usuario usuario = new Usuario();
+            operaciones.CrearUsuario(usuario);
+        }
 
-        //public void Editar(string nombre,
-        //                   string apellido,
-        //                   int edad,
-        //                   int numeroDocumento,
-        //                   int idTipoDocumento,
-        //                   int idCiudadResidencia,
-        //                   int idDepartamentoResidencia,
-        //                   string direccion,
-        //                   int telefono,
-        //                   int celular,
-        //                   string correo,
-        //                   string ocupacion,
-        //                   int idUsuario)
+        //public void Editar()
         //{
-        //    operaciones.Editar(nombre,
-        //                    apellido,
-        //                    Convert.ToInt32(edad),
-        //                    Convert.ToInt32(numeroDocumento),
-        //                    Convert.ToInt32(idTipoDocumento),
-        //                    Convert.ToInt32(idCiudadResidencia),
-        //                    Convert.ToInt32(idDepartamentoResidencia),
-        //                    direccion,
-        //                    Convert.ToInt32(telefono),
-        //                    Convert.ToInt32(celular),
-        //                    correo,
-        //                    ocupacion,
-        //                   Convert.ToInt32(idUsuario));
+        //    Usuario usuario = new Usuario();
+        //    operaciones.Editar();
         //}
 
         public void Eliminar(string idUsuario)
         {
-            operaciones.Eliminar(Convert.ToInt32(idUsuario));
+            operaciones.Eliminar(Convert.ToInt32(idUsuario).ToString());
         }
     }
 }

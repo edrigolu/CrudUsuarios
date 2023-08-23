@@ -50,11 +50,9 @@
             this.txtApellidos = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtTelefono = new System.Windows.Forms.TextBox();
             this.txtOcupacion = new System.Windows.Forms.TextBox();
             this.txtCorreo = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.txtCelular = new System.Windows.Forms.TextBox();
+            this.txtDireccion = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -66,8 +64,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.BtnEditar = new System.Windows.Forms.Button();
+            this.BtnEliminar = new System.Windows.Forms.Button();
+            this.txtTelefono = new System.Windows.Forms.TextBox();
+            this.txtCelular = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
             this.SuspendLayout();
@@ -226,6 +226,7 @@
             this.BtnGuardar.TabIndex = 37;
             this.BtnGuardar.Text = "Guardar";
             this.BtnGuardar.UseVisualStyleBackColor = false;
+            this.BtnGuardar.Click += new System.EventHandler(this.BtnGuardar_Click);
             // 
             // CboCiudad
             // 
@@ -296,15 +297,6 @@
             this.label1.TabIndex = 21;
             this.label1.Text = "Apellidos:";
             // 
-            // txtTelefono
-            // 
-            this.txtTelefono.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTelefono.Location = new System.Drawing.Point(470, 163);
-            this.txtTelefono.MaxLength = 10;
-            this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new System.Drawing.Size(419, 26);
-            this.txtTelefono.TabIndex = 33;
-            // 
             // txtOcupacion
             // 
             this.txtOcupacion.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -317,29 +309,20 @@
             // txtCorreo
             // 
             this.txtCorreo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCorreo.Location = new System.Drawing.Point(470, 213);
+            this.txtCorreo.Location = new System.Drawing.Point(461, 207);
             this.txtCorreo.MaxLength = 50;
             this.txtCorreo.Name = "txtCorreo";
-            this.txtCorreo.Size = new System.Drawing.Size(256, 26);
+            this.txtCorreo.Size = new System.Drawing.Size(329, 26);
             this.txtCorreo.TabIndex = 35;
             // 
-            // textBox1
+            // txtDireccion
             // 
-            this.textBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(90, 163);
-            this.textBox1.MaxLength = 50;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(256, 26);
-            this.textBox1.TabIndex = 32;
-            // 
-            // txtCelular
-            // 
-            this.txtCelular.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCelular.Location = new System.Drawing.Point(90, 212);
-            this.txtCelular.MaxLength = 50;
-            this.txtCelular.Name = "txtCelular";
-            this.txtCelular.Size = new System.Drawing.Size(256, 26);
-            this.txtCelular.TabIndex = 34;
+            this.txtDireccion.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDireccion.Location = new System.Drawing.Point(90, 163);
+            this.txtDireccion.MaxLength = 50;
+            this.txtDireccion.Name = "txtDireccion";
+            this.txtDireccion.Size = new System.Drawing.Size(256, 26);
+            this.txtDireccion.TabIndex = 32;
             // 
             // txtNombre
             // 
@@ -449,26 +432,42 @@
             this.label2.TabIndex = 38;
             this.label2.Text = "Edad:";
             // 
-            // button1
+            // BtnEditar
             // 
-            this.button1.BackColor = System.Drawing.Color.Khaki;
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button1.Location = new System.Drawing.Point(384, 624);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 34);
-            this.button1.TabIndex = 39;
-            this.button1.Text = "Editar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.BtnEditar.BackColor = System.Drawing.Color.Khaki;
+            this.BtnEditar.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.BtnEditar.Location = new System.Drawing.Point(384, 624);
+            this.BtnEditar.Name = "BtnEditar";
+            this.BtnEditar.Size = new System.Drawing.Size(75, 34);
+            this.BtnEditar.TabIndex = 39;
+            this.BtnEditar.Text = "Editar";
+            this.BtnEditar.UseVisualStyleBackColor = false;
+            this.BtnEditar.Click += new System.EventHandler(this.BtnEditar_Click);
             // 
-            // button2
+            // BtnEliminar
             // 
-            this.button2.BackColor = System.Drawing.Color.Orange;
-            this.button2.Location = new System.Drawing.Point(488, 624);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 34);
-            this.button2.TabIndex = 40;
-            this.button2.Text = "Eliminar";
-            this.button2.UseVisualStyleBackColor = false;
+            this.BtnEliminar.BackColor = System.Drawing.Color.Orange;
+            this.BtnEliminar.Location = new System.Drawing.Point(488, 624);
+            this.BtnEliminar.Name = "BtnEliminar";
+            this.BtnEliminar.Size = new System.Drawing.Size(75, 34);
+            this.BtnEliminar.TabIndex = 40;
+            this.BtnEliminar.Text = "Eliminar";
+            this.BtnEliminar.UseVisualStyleBackColor = false;
+            this.BtnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
+            // 
+            // txtTelefono
+            // 
+            this.txtTelefono.Location = new System.Drawing.Point(451, 161);
+            this.txtTelefono.Name = "txtTelefono";
+            this.txtTelefono.Size = new System.Drawing.Size(339, 20);
+            this.txtTelefono.TabIndex = 43;
+            // 
+            // txtCelular
+            // 
+            this.txtCelular.Location = new System.Drawing.Point(90, 205);
+            this.txtCelular.Name = "txtCelular";
+            this.txtCelular.Size = new System.Drawing.Size(256, 20);
+            this.txtCelular.TabIndex = 44;
             // 
             // FrmUsuarios
             // 
@@ -476,8 +475,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1127, 749);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.txtCelular);
+            this.Controls.Add(this.txtTelefono);
+            this.Controls.Add(this.BtnEliminar);
+            this.Controls.Add(this.BtnEditar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.BtnGuardar);
             this.Controls.Add(this.CboCiudad);
@@ -488,11 +489,9 @@
             this.Controls.Add(this.txtApellidos);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtTelefono);
             this.Controls.Add(this.txtOcupacion);
             this.Controls.Add(this.txtCorreo);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.txtCelular);
+            this.Controls.Add(this.txtDireccion);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label6);
@@ -541,11 +540,9 @@
         private System.Windows.Forms.TextBox txtApellidos;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.TextBox txtOcupacion;
         private System.Windows.Forms.TextBox txtCorreo;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox txtCelular;
+        private System.Windows.Forms.TextBox txtDireccion;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label6;
@@ -557,7 +554,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BtnEditar;
+        private System.Windows.Forms.Button BtnEliminar;
+        private System.Windows.Forms.TextBox txtTelefono;
+        private System.Windows.Forms.TextBox txtCelular;
     }
 }
