@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.rdbNumDocumento = new System.Windows.Forms.RadioButton();
-            this.rdbApellidos = new System.Windows.Forms.RadioButton();
-            this.rdbNombre = new System.Windows.Forms.RadioButton();
+            this.BtnLimpiar = new System.Windows.Forms.Button();
+            this.BtnBuscar = new System.Windows.Forms.Button();
+            this.RdbNumDocumento = new System.Windows.Forms.RadioButton();
+            this.RdbApellidos = new System.Windows.Forms.RadioButton();
+            this.RdbNombre = new System.Windows.Forms.RadioButton();
             this.txtFiltroNombre = new System.Windows.Forms.TextBox();
             this.lblFiltroApellido = new System.Windows.Forms.Label();
             this.txtFiltroNumDoc = new System.Windows.Forms.TextBox();
@@ -41,10 +41,10 @@
             this.txtFiltroApellido = new System.Windows.Forms.TextBox();
             this.lblFiltroNumDoc = new System.Windows.Forms.Label();
             this.dgvUsuarios = new System.Windows.Forms.DataGridView();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.cboDepartamento = new System.Windows.Forms.ComboBox();
-            this.cboTipoDocumento = new System.Windows.Forms.ComboBox();
+            this.BtnGuardar = new System.Windows.Forms.Button();
+            this.CboCiudad = new System.Windows.Forms.ComboBox();
+            this.CboDepartamento = new System.Windows.Forms.ComboBox();
+            this.CboTipoDocumento = new System.Windows.Forms.ComboBox();
             this.txtEdad = new System.Windows.Forms.TextBox();
             this.txtNumDocumento = new System.Windows.Forms.TextBox();
             this.txtApellidos = new System.Windows.Forms.TextBox();
@@ -74,11 +74,11 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnLimpiar);
-            this.groupBox1.Controls.Add(this.btnBuscar);
-            this.groupBox1.Controls.Add(this.rdbNumDocumento);
-            this.groupBox1.Controls.Add(this.rdbApellidos);
-            this.groupBox1.Controls.Add(this.rdbNombre);
+            this.groupBox1.Controls.Add(this.BtnLimpiar);
+            this.groupBox1.Controls.Add(this.BtnBuscar);
+            this.groupBox1.Controls.Add(this.RdbNumDocumento);
+            this.groupBox1.Controls.Add(this.RdbApellidos);
+            this.groupBox1.Controls.Add(this.RdbNombre);
             this.groupBox1.Controls.Add(this.txtFiltroNombre);
             this.groupBox1.Controls.Add(this.lblFiltroApellido);
             this.groupBox1.Controls.Add(this.txtFiltroNumDoc);
@@ -93,65 +93,65 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
             // 
-            // btnLimpiar
+            // BtnLimpiar
             // 
-            this.btnLimpiar.BackColor = System.Drawing.Color.Turquoise;
-            this.btnLimpiar.Location = new System.Drawing.Point(627, 41);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(75, 37);
-            this.btnLimpiar.TabIndex = 7;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.UseVisualStyleBackColor = false;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            this.BtnLimpiar.BackColor = System.Drawing.Color.Turquoise;
+            this.BtnLimpiar.Location = new System.Drawing.Point(627, 41);
+            this.BtnLimpiar.Name = "BtnLimpiar";
+            this.BtnLimpiar.Size = new System.Drawing.Size(75, 37);
+            this.BtnLimpiar.TabIndex = 7;
+            this.BtnLimpiar.Text = "Limpiar";
+            this.BtnLimpiar.UseVisualStyleBackColor = false;
+            this.BtnLimpiar.Click += new System.EventHandler(this.BtnLimpiar_Click);
             // 
-            // btnBuscar
+            // BtnBuscar
             // 
-            this.btnBuscar.BackColor = System.Drawing.Color.SeaGreen;
-            this.btnBuscar.Location = new System.Drawing.Point(546, 41);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 37);
-            this.btnBuscar.TabIndex = 6;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = false;
+            this.BtnBuscar.BackColor = System.Drawing.Color.SeaGreen;
+            this.BtnBuscar.Location = new System.Drawing.Point(546, 41);
+            this.BtnBuscar.Name = "BtnBuscar";
+            this.BtnBuscar.Size = new System.Drawing.Size(75, 37);
+            this.BtnBuscar.TabIndex = 6;
+            this.BtnBuscar.Text = "Buscar";
+            this.BtnBuscar.UseVisualStyleBackColor = false;
             // 
-            // rdbNumDocumento
+            // RdbNumDocumento
             // 
-            this.rdbNumDocumento.AutoSize = true;
-            this.rdbNumDocumento.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbNumDocumento.Location = new System.Drawing.Point(790, 21);
-            this.rdbNumDocumento.Name = "rdbNumDocumento";
-            this.rdbNumDocumento.Size = new System.Drawing.Size(178, 20);
-            this.rdbNumDocumento.TabIndex = 0;
-            this.rdbNumDocumento.TabStop = true;
-            this.rdbNumDocumento.Text = "Por numero de documento";
-            this.rdbNumDocumento.UseVisualStyleBackColor = true;
-            this.rdbNumDocumento.Click += new System.EventHandler(this.rdbNumDocumento_Click);
+            this.RdbNumDocumento.AutoSize = true;
+            this.RdbNumDocumento.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RdbNumDocumento.Location = new System.Drawing.Point(790, 21);
+            this.RdbNumDocumento.Name = "RdbNumDocumento";
+            this.RdbNumDocumento.Size = new System.Drawing.Size(178, 20);
+            this.RdbNumDocumento.TabIndex = 0;
+            this.RdbNumDocumento.TabStop = true;
+            this.RdbNumDocumento.Text = "Por numero de documento";
+            this.RdbNumDocumento.UseVisualStyleBackColor = true;
+            this.RdbNumDocumento.Click += new System.EventHandler(this.RdbNumDocumento_Click);
             // 
-            // rdbApellidos
+            // RdbApellidos
             // 
-            this.rdbApellidos.AutoSize = true;
-            this.rdbApellidos.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbApellidos.Location = new System.Drawing.Point(380, 21);
-            this.rdbApellidos.Name = "rdbApellidos";
-            this.rdbApellidos.Size = new System.Drawing.Size(93, 20);
-            this.rdbApellidos.TabIndex = 0;
-            this.rdbApellidos.TabStop = true;
-            this.rdbApellidos.Text = "Por apellido";
-            this.rdbApellidos.UseVisualStyleBackColor = true;
-            this.rdbApellidos.Click += new System.EventHandler(this.rdbApellidos_Click);
+            this.RdbApellidos.AutoSize = true;
+            this.RdbApellidos.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RdbApellidos.Location = new System.Drawing.Point(380, 21);
+            this.RdbApellidos.Name = "RdbApellidos";
+            this.RdbApellidos.Size = new System.Drawing.Size(93, 20);
+            this.RdbApellidos.TabIndex = 0;
+            this.RdbApellidos.TabStop = true;
+            this.RdbApellidos.Text = "Por apellido";
+            this.RdbApellidos.UseVisualStyleBackColor = true;
+            this.RdbApellidos.Click += new System.EventHandler(this.RdbApellidos_Click);
             // 
-            // rdbNombre
+            // RdbNombre
             // 
-            this.rdbNombre.AutoSize = true;
-            this.rdbNombre.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbNombre.Location = new System.Drawing.Point(12, 21);
-            this.rdbNombre.Name = "rdbNombre";
-            this.rdbNombre.Size = new System.Drawing.Size(93, 20);
-            this.rdbNombre.TabIndex = 0;
-            this.rdbNombre.TabStop = true;
-            this.rdbNombre.Text = "Por nombre";
-            this.rdbNombre.UseVisualStyleBackColor = true;
-            this.rdbNombre.Click += new System.EventHandler(this.rdbNombre_Click);
+            this.RdbNombre.AutoSize = true;
+            this.RdbNombre.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RdbNombre.Location = new System.Drawing.Point(12, 21);
+            this.RdbNombre.Name = "RdbNombre";
+            this.RdbNombre.Size = new System.Drawing.Size(93, 20);
+            this.RdbNombre.TabIndex = 0;
+            this.RdbNombre.TabStop = true;
+            this.RdbNombre.Text = "Por nombre";
+            this.RdbNombre.UseVisualStyleBackColor = true;
+            this.RdbNombre.Click += new System.EventHandler(this.RdbNombre_Click);
             // 
             // txtFiltroNombre
             // 
@@ -210,46 +210,47 @@
             // dgvUsuarios
             // 
             this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUsuarios.Location = new System.Drawing.Point(15, 439);
+            this.dgvUsuarios.Location = new System.Drawing.Point(15, 449);
             this.dgvUsuarios.Name = "dgvUsuarios";
             this.dgvUsuarios.Size = new System.Drawing.Size(1034, 150);
             this.dgvUsuarios.TabIndex = 2;
             // 
-            // btnGuardar
+            // BtnGuardar
             // 
-            this.btnGuardar.BackColor = System.Drawing.Color.Aquamarine;
-            this.btnGuardar.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnGuardar.Location = new System.Drawing.Point(384, 289);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(101, 34);
-            this.btnGuardar.TabIndex = 37;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = false;
+            this.BtnGuardar.BackColor = System.Drawing.Color.Aquamarine;
+            this.BtnGuardar.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnGuardar.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.BtnGuardar.Location = new System.Drawing.Point(384, 289);
+            this.BtnGuardar.Name = "BtnGuardar";
+            this.BtnGuardar.Size = new System.Drawing.Size(101, 34);
+            this.BtnGuardar.TabIndex = 37;
+            this.BtnGuardar.Text = "Guardar";
+            this.BtnGuardar.UseVisualStyleBackColor = false;
             // 
-            // comboBox2
+            // CboCiudad
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(451, 111);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(438, 21);
-            this.comboBox2.TabIndex = 31;
+            this.CboCiudad.FormattingEnabled = true;
+            this.CboCiudad.Location = new System.Drawing.Point(451, 111);
+            this.CboCiudad.Name = "CboCiudad";
+            this.CboCiudad.Size = new System.Drawing.Size(438, 21);
+            this.CboCiudad.TabIndex = 31;
             // 
-            // cboDepartamento
+            // CboDepartamento
             // 
-            this.cboDepartamento.FormattingEnabled = true;
-            this.cboDepartamento.Location = new System.Drawing.Point(117, 112);
-            this.cboDepartamento.Name = "cboDepartamento";
-            this.cboDepartamento.Size = new System.Drawing.Size(229, 21);
-            this.cboDepartamento.TabIndex = 30;
+            this.CboDepartamento.FormattingEnabled = true;
+            this.CboDepartamento.Location = new System.Drawing.Point(117, 112);
+            this.CboDepartamento.Name = "CboDepartamento";
+            this.CboDepartamento.Size = new System.Drawing.Size(229, 21);
+            this.CboDepartamento.TabIndex = 30;
+            this.CboDepartamento.SelectedIndexChanged += new System.EventHandler(this.CboDepartamento_SelectedIndexChanged);
             // 
-            // cboTipoDocumento
+            // CboTipoDocumento
             // 
-            this.cboTipoDocumento.FormattingEnabled = true;
-            this.cboTipoDocumento.Location = new System.Drawing.Point(153, 60);
-            this.cboTipoDocumento.Name = "cboTipoDocumento";
-            this.cboTipoDocumento.Size = new System.Drawing.Size(193, 21);
-            this.cboTipoDocumento.TabIndex = 28;
+            this.CboTipoDocumento.FormattingEnabled = true;
+            this.CboTipoDocumento.Location = new System.Drawing.Point(153, 60);
+            this.CboTipoDocumento.Name = "CboTipoDocumento";
+            this.CboTipoDocumento.Size = new System.Drawing.Size(193, 21);
+            this.CboTipoDocumento.TabIndex = 28;
             // 
             // txtEdad
             // 
@@ -452,9 +453,9 @@
             // 
             this.button1.BackColor = System.Drawing.Color.Khaki;
             this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button1.Location = new System.Drawing.Point(384, 635);
+            this.button1.Location = new System.Drawing.Point(384, 624);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(75, 34);
             this.button1.TabIndex = 39;
             this.button1.Text = "Editar";
             this.button1.UseVisualStyleBackColor = false;
@@ -462,9 +463,9 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Orange;
-            this.button2.Location = new System.Drawing.Point(488, 635);
+            this.button2.Location = new System.Drawing.Point(488, 624);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(75, 34);
             this.button2.TabIndex = 40;
             this.button2.Text = "Eliminar";
             this.button2.UseVisualStyleBackColor = false;
@@ -478,10 +479,10 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.cboDepartamento);
-            this.Controls.Add(this.cboTipoDocumento);
+            this.Controls.Add(this.BtnGuardar);
+            this.Controls.Add(this.CboCiudad);
+            this.Controls.Add(this.CboDepartamento);
+            this.Controls.Add(this.CboTipoDocumento);
             this.Controls.Add(this.txtEdad);
             this.Controls.Add(this.txtNumDocumento);
             this.Controls.Add(this.txtApellidos);
@@ -519,22 +520,22 @@
 
         #endregion
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rdbApellidos;
-        private System.Windows.Forms.RadioButton rdbNombre;
-        private System.Windows.Forms.RadioButton rdbNumDocumento;
+        private System.Windows.Forms.RadioButton RdbApellidos;
+        private System.Windows.Forms.RadioButton RdbNombre;
+        private System.Windows.Forms.RadioButton RdbNumDocumento;
         private System.Windows.Forms.TextBox txtFiltroNombre;
         private System.Windows.Forms.Label lblFiltroNombre;
         private System.Windows.Forms.Label lblFiltroApellido;
         private System.Windows.Forms.TextBox txtFiltroApellido;
         private System.Windows.Forms.TextBox txtFiltroNumDoc;
         private System.Windows.Forms.Label lblFiltroNumDoc;
-        private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.Button BtnLimpiar;
+        private System.Windows.Forms.Button BtnBuscar;
         private System.Windows.Forms.DataGridView dgvUsuarios;
-        private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox cboDepartamento;
-        private System.Windows.Forms.ComboBox cboTipoDocumento;
+        private System.Windows.Forms.Button BtnGuardar;
+        private System.Windows.Forms.ComboBox CboCiudad;
+        private System.Windows.Forms.ComboBox CboDepartamento;
+        private System.Windows.Forms.ComboBox CboTipoDocumento;
         private System.Windows.Forms.TextBox txtEdad;
         private System.Windows.Forms.TextBox txtNumDocumento;
         private System.Windows.Forms.TextBox txtApellidos;

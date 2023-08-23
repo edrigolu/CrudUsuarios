@@ -1,78 +1,88 @@
-﻿using System.Data;
-using System;
-using Usuarios.Datos;
+﻿using System;
+using Usuarios.Datos.Data;
 
 namespace Usuarios.Negocio
 {
     public class UsuariosN
     {
-        private readonly UsuarioD usuarioD = new UsuarioD();
+        private readonly Operaciones operaciones = new Operaciones();
 
-        public DataTable MostrarUsuarios()
+        //public DataTable MostrarUsuarios()
+        //{
+        //    DataTable tabla = new DataTable();
+        //    tabla = operaciones.Mostrar();
+        //    return tabla;
+        //}
+
+        public void MostrarDepartamentos()
         {
-            DataTable tabla = new DataTable();
-            tabla = usuarioD.Mostrar();
-            return tabla;
-        }
-        public void Insertar(string nombre,
-                             string apellido,
-                             int edad,
-                             int numeroDocumento,
-                             int idTipoDocumento,
-                             int idCiudadResidencia,
-                             int idDepartamentoResidencia,
-                             string direccion,
-                             int telefono,
-                             int celular,
-                             string correo,
-                             string ocupacion)
-        {
-            usuarioD.Insertar(nombre,
-                            apellido,
-                            Convert.ToInt32(edad),
-                            Convert.ToInt32(numeroDocumento),
-                           Convert.ToInt32(idTipoDocumento),
-                            Convert.ToInt32(idCiudadResidencia),
-                            Convert.ToInt32(idDepartamentoResidencia),
-                            direccion,
-                            Convert.ToInt32(telefono),
-                            Convert.ToInt32(celular),
-                            correo,
-                            ocupacion);
+            operaciones.ObtenerDepartamentos();
         }
 
-        public void Editar(string nombre,
-                           string apellido,
-                           int edad,
-                           int numeroDocumento,
-                           int idTipoDocumento,
-                           int idCiudadResidencia,
-                           int idDepartamentoResidencia,
-                           string direccion,
-                           int telefono,
-                           int celular,
-                           string correo,
-                           string ocupacion,
-                           int idUsuario)
+        public void ObtenerTipoDocumento()
         {
-            usuarioD.Editar(nombre,
-                            apellido,
-                            Convert.ToInt32(edad),
-                            Convert.ToInt32(numeroDocumento),
-                            Convert.ToInt32(idTipoDocumento),
-                            Convert.ToInt32(idCiudadResidencia),
-                            Convert.ToInt32(idDepartamentoResidencia),
-                            direccion,
-                            Convert.ToInt32(telefono),
-                            Convert.ToInt32(celular),
-                            correo,
-                            ocupacion,
-                           Convert.ToInt32(idUsuario));
+            operaciones.ObtenerTipoDocumento();
         }
+
+        //public void Insertar(string nombre,
+        //                     string apellido,
+        //                     int edad,
+        //                     int numeroDocumento,
+        //                     int idTipoDocumento,
+        //                     int idCiudadResidencia,
+        //                     int idDepartamentoResidencia,
+        //                     string direccion,
+        //                     int telefono,
+        //                     int celular,
+        //                     string correo,
+        //                     string ocupacion)
+        //{
+        //    operaciones.Insertar(nombre,
+        //                    apellido,
+        //                    Convert.ToInt32(edad),
+        //                    Convert.ToInt32(numeroDocumento),
+        //                   Convert.ToInt32(idTipoDocumento),
+        //                    Convert.ToInt32(idCiudadResidencia),
+        //                    Convert.ToInt32(idDepartamentoResidencia),
+        //                    direccion,
+        //                    Convert.ToInt32(telefono),
+        //                    Convert.ToInt32(celular),
+        //                    correo,
+        //                    ocupacion);
+        //}
+
+        //public void Editar(string nombre,
+        //                   string apellido,
+        //                   int edad,
+        //                   int numeroDocumento,
+        //                   int idTipoDocumento,
+        //                   int idCiudadResidencia,
+        //                   int idDepartamentoResidencia,
+        //                   string direccion,
+        //                   int telefono,
+        //                   int celular,
+        //                   string correo,
+        //                   string ocupacion,
+        //                   int idUsuario)
+        //{
+        //    operaciones.Editar(nombre,
+        //                    apellido,
+        //                    Convert.ToInt32(edad),
+        //                    Convert.ToInt32(numeroDocumento),
+        //                    Convert.ToInt32(idTipoDocumento),
+        //                    Convert.ToInt32(idCiudadResidencia),
+        //                    Convert.ToInt32(idDepartamentoResidencia),
+        //                    direccion,
+        //                    Convert.ToInt32(telefono),
+        //                    Convert.ToInt32(celular),
+        //                    correo,
+        //                    ocupacion,
+        //                   Convert.ToInt32(idUsuario));
+        //}
 
         public void Eliminar(string idUsuario)
         {
-            usuarioD.Eliminar(Convert.ToInt32(idUsuario));
+            operaciones.Eliminar(Convert.ToInt32(idUsuario));
         }
     }
 }

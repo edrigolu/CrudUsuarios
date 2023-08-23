@@ -80,6 +80,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Usuarios.Datos\Usuarios.Datos.csproj">
+      <Project>{463B1162-579E-4783-A50C-10F9EFED2711}</Project>
+      <Name>Usuarios.Datos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Usuarios.Entidades\Usuarios.Entidades.csproj">
+      <Project>{25944ADB-3058-4BA4-AED1-DC85DD5E7878}</Project>
+      <Name>Usuarios.Entidades</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Usuarios.Negocio\Usuarios.Negocio.csproj">
       <Project>{3df70f9b-b6eb-4f90-a698-6a5c5fa2b764}</Project>
       <Name>Usuarios.Negocio</Name>
