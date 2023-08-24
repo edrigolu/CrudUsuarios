@@ -11,13 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usuarios.Negocio", "Usuario
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usuarios.Entidades", "Usuarios.Entidades\Usuarios.Entidades.csproj", "{25944ADB-3058-4BA4-AED1-DC85DD5E7878}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{84C50057-68A4-4CC4-88A6-900D99235CA3}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\Documents\01-Crear Base de datos y Tablas.sql = ..\..\..\Documents\01-Crear Base de datos y Tablas.sql
-		..\..\..\Documents\02-INSERTAR DATOS.sql = ..\..\..\Documents\02-INSERTAR DATOS.sql
-		..\..\..\Documents\03-CREAR PROCEDIMIENTOS ALMACENADOS.sql = ..\..\..\Documents\03-CREAR PROCEDIMIENTOS ALMACENADOS.sql
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
