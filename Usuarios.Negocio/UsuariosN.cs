@@ -26,7 +26,7 @@ namespace Usuarios.Negocio
 
         public void Insertar()
         {
-            Usuario usuario = new Usuario();
+            Entidades.Persona usuario = new Entidades.Persona();
             operaciones.CrearUsuario(usuario);
         }
 

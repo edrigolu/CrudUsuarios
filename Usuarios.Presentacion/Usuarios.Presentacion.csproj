@@ -46,16 +46,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FrmUsuarios.cs">
+    <Compile Include="Registros.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmUsuarios.Designer.cs">
-      <DependentUpon>FrmUsuarios.cs</DependentUpon>
+    <Compile Include="Registros.Designer.cs">
+      <DependentUpon>Registros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Usuario.Designer.cs">
+      <DependentUpon>Usuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FrmUsuarios.resx">
-      <DependentUpon>FrmUsuarios.cs</DependentUpon>
+    <EmbeddedResource Include="Registros.resx">
+      <DependentUpon>Registros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Usuario.resx">
+      <DependentUpon>Usuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

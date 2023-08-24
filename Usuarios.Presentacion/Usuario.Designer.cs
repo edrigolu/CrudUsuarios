@@ -1,6 +1,6 @@
 ﻿namespace Usuarios.Presentacion
 {
-    partial class FrmUsuarios
+    partial class Usuario
     {
         /// <summary>
         /// Required designer variable.
@@ -68,6 +68,8 @@
             this.BtnEliminar = new System.Windows.Forms.Button();
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.txtCelular = new System.Windows.Forms.TextBox();
+            this.txtIdUsuario = new System.Windows.Forms.TextBox();
+            this.BtnNuevo = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
             this.SuspendLayout();
@@ -469,12 +471,35 @@
             this.txtCelular.Size = new System.Drawing.Size(256, 20);
             this.txtCelular.TabIndex = 44;
             // 
-            // FrmUsuarios
+            // txtIdUsuario
+            // 
+            this.txtIdUsuario.Location = new System.Drawing.Point(461, 252);
+            this.txtIdUsuario.Name = "txtIdUsuario";
+            this.txtIdUsuario.Size = new System.Drawing.Size(100, 20);
+            this.txtIdUsuario.TabIndex = 46;
+            this.txtIdUsuario.Visible = false;
+            // 
+            // BtnNuevo
+            // 
+            this.BtnNuevo.BackColor = System.Drawing.Color.Aquamarine;
+            this.BtnNuevo.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnNuevo.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.BtnNuevo.Location = new System.Drawing.Point(518, 289);
+            this.BtnNuevo.Name = "BtnNuevo";
+            this.BtnNuevo.Size = new System.Drawing.Size(101, 34);
+            this.BtnNuevo.TabIndex = 47;
+            this.BtnNuevo.Text = "Nuevo";
+            this.BtnNuevo.UseVisualStyleBackColor = false;
+            this.BtnNuevo.Click += new System.EventHandler(this.BtnNuevo_Click);
+            // 
+            // Usuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1127, 749);
+            this.Controls.Add(this.BtnNuevo);
+            this.Controls.Add(this.txtIdUsuario);
             this.Controls.Add(this.txtCelular);
             this.Controls.Add(this.txtTelefono);
             this.Controls.Add(this.BtnEliminar);
@@ -504,7 +529,7 @@
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.dgvUsuarios);
             this.Controls.Add(this.groupBox1);
-            this.Name = "FrmUsuarios";
+            this.Name = "Usuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Usuarios";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -558,5 +583,7 @@
         private System.Windows.Forms.Button BtnEliminar;
         private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.TextBox txtCelular;
+        private System.Windows.Forms.TextBox txtIdUsuario;
+        private System.Windows.Forms.Button BtnNuevo;
     }
 }

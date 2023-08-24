@@ -23,7 +23,7 @@ namespace Usuarios.Datos.Data
             }
         }
 
-        public bool CrearUsuario(Usuario usuario)
+        public bool CrearUsuario(Entidades.Persona usuario)
         {
             bool respuesta = true;
             using (SqlConnection oConexion = new SqlConnection(Configuracion.Conexion))
@@ -183,17 +183,44 @@ namespace Usuarios.Datos.Data
                 dr.Close();
             }
             return oListarUsuarios;
-        }
+        }       
 
-
-        public bool Editar(Usuario usuario)
+        public bool Modificar(Entidades.Persona usuario)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool Modificar(Usuario oPersona)
-        {
-            throw new NotImplementedException();
+            bool respuesta = true;
+            using (SqlConnection oConexion = new SqlConnection(Configuracion.Conexion))
+            {
+                try
+                {
+                    SqlCommand comando = new SqlCommand("PA_ModificarUsuario", oConexion)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+                    comando.Parameters.AddWithValue("IdUsuario",usuario.IdUsuario);
+                    comando.Parameters.AddWithValue("Nombres", usuario.Nombres);
+                    comando.Parameters.AddWithValue("Apellidos", usuario.Apellidos);
+                    comando.Parameters.AddWithValue("Edad", usuario.Edad);
+                    comando.Parameters.AddWithValue("NumeroDocumento", usuario.NumeroDocumento);
+                    comando.Parameters.AddWithValue("IdTipoDocumento", Convert.ToInt32(usuario.IdTipoDocumento));
+                    comando.Parameters.AddWithValue("IdCiudadResidencia", Convert.ToInt32(usuario.IdCiudadResidencia));
+                    comando.Parameters.AddWithValue("IdDepartamentoResidencia", Convert.ToInt32(usuario.IdDepartamentoResidencia));
+                    comando.Parameters.AddWithValue("Direccion", usuario.Direccion);
+                    comando.Parameters.AddWithValue("Telefono", usuario.Telefono);
+                    comando.Parameters.AddWithValue("Celular", usuario.Celular);
+                    comando.Parameters.AddWithValue("Correo", usuario.Correo);
+                    comando.Parameters.AddWithValue("Ocupacion", usuario.Ocupacion);
+                    comando.Parameters.AddWithValue("Activo", 1);
+                    comando.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    oConexion.Open();
+                    comando.ExecuteNonQuery();
+                    respuesta = Convert.ToBoolean(comando.Parameters["Resultado"].Value);
+                }
+                catch (Exception ex)
+                {
+                    respuesta = false;
+                }
+            }
+            return respuesta;
         }
     }
 }
