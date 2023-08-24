@@ -23,7 +23,66 @@ namespace Usuarios.Datos.Data
             }
         }
 
-        public bool CrearUsuario(Entidades.Persona usuario)
+        public  DataTable FiltrarNombre(string nombre)
+        {
+            using (SqlConnection oConexion = new SqlConnection(Configuracion.Conexion))
+            {
+                SqlCommand comando = new SqlCommand("PA_FiltrarPorNombre", oConexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };               
+                comando.Parameters.AddWithValue("@Nombre", nombre);
+                oConexion.Open();
+                comando.ExecuteNonQuery();                
+                DataTable dt = new DataTable();
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(comando);
+                sqlDataAdapter.Fill(dt);
+                comando.Parameters.Clear();
+                return dt;
+            }
+        }
+
+
+        public DataTable FiltrarApellido(string apellido)
+        {
+            using (SqlConnection oConexion = new SqlConnection(Configuracion.Conexion))
+            {
+                SqlCommand comando = new SqlCommand("PA_FiltrarPorApellido", oConexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                comando.Parameters.AddWithValue("@Apellidos", apellido);
+                oConexion.Open();
+                comando.ExecuteNonQuery();               
+                DataTable dt = new DataTable();
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(comando);
+                sqlDataAdapter.Fill(dt);
+                comando.Parameters.Clear();
+                return dt;
+            }
+        }
+
+        public DataTable FiltrarNumDocumento(string numerodocumento)
+        {
+            using (SqlConnection oConexion = new SqlConnection(Configuracion.Conexion))
+            {
+                SqlCommand comando = new SqlCommand("PA_FiltrarPorNumeroDocumento", oConexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                comando.Parameters.AddWithValue("@NumDoc", numerodocumento);
+                oConexion.Open();
+                comando.ExecuteNonQuery();
+                
+                DataTable dt = new DataTable();
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(comando);
+                sqlDataAdapter.Fill(dt);
+                comando.Parameters.Clear();
+                return dt;
+            }
+        }
+
+        public bool CrearUsuario(Persona usuario)
         {
             bool respuesta = true;
             using (SqlConnection oConexion = new SqlConnection(Configuracion.Conexion))
@@ -62,7 +121,6 @@ namespace Usuarios.Datos.Data
             }
             return respuesta;
         }
-
 
         public List<Municipios> ObtenerMunicipios(int CodigoDepartamento)
         {
@@ -146,10 +204,9 @@ namespace Usuarios.Datos.Data
             return oListarTiposDocumento;
         }
 
-
-        public List<UsuarioViewModel> ObtenerUsuarios()
+        public List<PersonaViewModel> ObtenerUsuarios()
         {
-            List<UsuarioViewModel> oListarUsuarios = new List<UsuarioViewModel>();
+            List<PersonaViewModel> oListarUsuarios = new List<PersonaViewModel>();
             using (SqlConnection oConexion = new SqlConnection(Configuracion.Conexion))
             {
                 SqlCommand cmd = new SqlCommand("PA_ListarUsuarios", oConexion)
@@ -162,7 +219,7 @@ namespace Usuarios.Datos.Data
 
                 while (dr.Read())
                 {
-                    oListarUsuarios.Add(new UsuarioViewModel
+                    oListarUsuarios.Add(new PersonaViewModel
                     {
                         IdUsuario = int.Parse(dr["IdUsuario"].ToString()),
                         Nombres = dr["Nombre"].ToString(),
@@ -183,7 +240,7 @@ namespace Usuarios.Datos.Data
                 dr.Close();
             }
             return oListarUsuarios;
-        }       
+        }
 
         public bool Modificar(Entidades.Persona usuario)
         {
@@ -196,7 +253,7 @@ namespace Usuarios.Datos.Data
                     {
                         CommandType = CommandType.StoredProcedure
                     };
-                    comando.Parameters.AddWithValue("IdUsuario",usuario.IdUsuario);
+                    comando.Parameters.AddWithValue("IdUsuario", usuario.IdUsuario);
                     comando.Parameters.AddWithValue("Nombres", usuario.Nombres);
                     comando.Parameters.AddWithValue("Apellidos", usuario.Apellidos);
                     comando.Parameters.AddWithValue("Edad", usuario.Edad);

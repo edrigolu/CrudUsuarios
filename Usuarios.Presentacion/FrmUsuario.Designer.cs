@@ -1,6 +1,6 @@
 ﻿namespace Usuarios.Presentacion
 {
-    partial class Usuario
+    partial class FrmUsuario
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,6 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.BtnLimpiar = new System.Windows.Forms.Button();
-            this.BtnBuscar = new System.Windows.Forms.Button();
             this.RdbNumDocumento = new System.Windows.Forms.RadioButton();
             this.RdbApellidos = new System.Windows.Forms.RadioButton();
             this.RdbNombre = new System.Windows.Forms.RadioButton();
@@ -69,7 +68,7 @@
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.txtCelular = new System.Windows.Forms.TextBox();
             this.txtIdUsuario = new System.Windows.Forms.TextBox();
-            this.BtnNuevo = new System.Windows.Forms.Button();
+            this.BtnExportarExcel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
             this.SuspendLayout();
@@ -77,20 +76,19 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.BtnLimpiar);
-            this.groupBox1.Controls.Add(this.BtnBuscar);
             this.groupBox1.Controls.Add(this.RdbNumDocumento);
             this.groupBox1.Controls.Add(this.RdbApellidos);
             this.groupBox1.Controls.Add(this.RdbNombre);
+            this.groupBox1.Controls.Add(this.txtFiltroNumDoc);
             this.groupBox1.Controls.Add(this.txtFiltroNombre);
             this.groupBox1.Controls.Add(this.lblFiltroApellido);
-            this.groupBox1.Controls.Add(this.txtFiltroNumDoc);
             this.groupBox1.Controls.Add(this.lblFiltroNombre);
             this.groupBox1.Controls.Add(this.txtFiltroApellido);
             this.groupBox1.Controls.Add(this.lblFiltroNumDoc);
             this.groupBox1.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(15, 329);
+            this.groupBox1.Location = new System.Drawing.Point(31, 329);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1034, 104);
+            this.groupBox1.Size = new System.Drawing.Size(1034, 150);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
@@ -98,7 +96,7 @@
             // BtnLimpiar
             // 
             this.BtnLimpiar.BackColor = System.Drawing.Color.Turquoise;
-            this.BtnLimpiar.Location = new System.Drawing.Point(627, 41);
+            this.BtnLimpiar.Location = new System.Drawing.Point(379, 107);
             this.BtnLimpiar.Name = "BtnLimpiar";
             this.BtnLimpiar.Size = new System.Drawing.Size(75, 37);
             this.BtnLimpiar.TabIndex = 7;
@@ -106,20 +104,10 @@
             this.BtnLimpiar.UseVisualStyleBackColor = false;
             this.BtnLimpiar.Click += new System.EventHandler(this.BtnLimpiar_Click);
             // 
-            // BtnBuscar
-            // 
-            this.BtnBuscar.BackColor = System.Drawing.Color.SeaGreen;
-            this.BtnBuscar.Location = new System.Drawing.Point(546, 41);
-            this.BtnBuscar.Name = "BtnBuscar";
-            this.BtnBuscar.Size = new System.Drawing.Size(75, 37);
-            this.BtnBuscar.TabIndex = 6;
-            this.BtnBuscar.Text = "Buscar";
-            this.BtnBuscar.UseVisualStyleBackColor = false;
-            // 
             // RdbNumDocumento
             // 
             this.RdbNumDocumento.AutoSize = true;
-            this.RdbNumDocumento.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RdbNumDocumento.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RdbNumDocumento.Location = new System.Drawing.Point(790, 21);
             this.RdbNumDocumento.Name = "RdbNumDocumento";
             this.RdbNumDocumento.Size = new System.Drawing.Size(178, 20);
@@ -132,7 +120,7 @@
             // RdbApellidos
             // 
             this.RdbApellidos.AutoSize = true;
-            this.RdbApellidos.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RdbApellidos.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RdbApellidos.Location = new System.Drawing.Point(380, 21);
             this.RdbApellidos.Name = "RdbApellidos";
             this.RdbApellidos.Size = new System.Drawing.Size(93, 20);
@@ -145,10 +133,10 @@
             // RdbNombre
             // 
             this.RdbNombre.AutoSize = true;
-            this.RdbNombre.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RdbNombre.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RdbNombre.Location = new System.Drawing.Point(12, 21);
             this.RdbNombre.Name = "RdbNombre";
-            this.RdbNombre.Size = new System.Drawing.Size(93, 20);
+            this.RdbNombre.Size = new System.Drawing.Size(92, 20);
             this.RdbNombre.TabIndex = 0;
             this.RdbNombre.TabStop = true;
             this.RdbNombre.Text = "Por nombre";
@@ -158,16 +146,17 @@
             // txtFiltroNombre
             // 
             this.txtFiltroNombre.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFiltroNombre.Location = new System.Drawing.Point(87, 57);
+            this.txtFiltroNombre.Location = new System.Drawing.Point(59, 67);
             this.txtFiltroNombre.Name = "txtFiltroNombre";
-            this.txtFiltroNombre.Size = new System.Drawing.Size(265, 26);
+            this.txtFiltroNombre.Size = new System.Drawing.Size(158, 26);
             this.txtFiltroNombre.TabIndex = 1;
+            this.txtFiltroNombre.TextChanged += new System.EventHandler(this.txtFiltroNombre_TextChanged);
             // 
             // lblFiltroApellido
             // 
             this.lblFiltroApellido.AutoSize = true;
             this.lblFiltroApellido.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblFiltroApellido.Location = new System.Drawing.Point(8, 65);
+            this.lblFiltroApellido.Location = new System.Drawing.Point(223, 72);
             this.lblFiltroApellido.Name = "lblFiltroApellido";
             this.lblFiltroApellido.Size = new System.Drawing.Size(60, 16);
             this.lblFiltroApellido.TabIndex = 0;
@@ -176,16 +165,17 @@
             // txtFiltroNumDoc
             // 
             this.txtFiltroNumDoc.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFiltroNumDoc.Location = new System.Drawing.Point(169, 57);
+            this.txtFiltroNumDoc.Location = new System.Drawing.Point(697, 67);
             this.txtFiltroNumDoc.Name = "txtFiltroNumDoc";
             this.txtFiltroNumDoc.Size = new System.Drawing.Size(331, 26);
             this.txtFiltroNumDoc.TabIndex = 5;
+            this.txtFiltroNumDoc.TextChanged += new System.EventHandler(this.txtFiltroNumDoc_TextChanged);
             // 
             // lblFiltroNombre
             // 
             this.lblFiltroNombre.AutoSize = true;
             this.lblFiltroNombre.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblFiltroNombre.Location = new System.Drawing.Point(9, 62);
+            this.lblFiltroNombre.Location = new System.Drawing.Point(9, 67);
             this.lblFiltroNombre.Name = "lblFiltroNombre";
             this.lblFiltroNombre.Size = new System.Drawing.Size(52, 16);
             this.lblFiltroNombre.TabIndex = 0;
@@ -194,16 +184,17 @@
             // txtFiltroApellido
             // 
             this.txtFiltroApellido.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFiltroApellido.Location = new System.Drawing.Point(87, 57);
+            this.txtFiltroApellido.Location = new System.Drawing.Point(289, 67);
             this.txtFiltroApellido.Name = "txtFiltroApellido";
             this.txtFiltroApellido.Size = new System.Drawing.Size(265, 26);
             this.txtFiltroApellido.TabIndex = 2;
+            this.txtFiltroApellido.TextChanged += new System.EventHandler(this.txtFiltroApellido_TextChanged);
             // 
             // lblFiltroNumDoc
             // 
             this.lblFiltroNumDoc.AutoSize = true;
             this.lblFiltroNumDoc.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblFiltroNumDoc.Location = new System.Drawing.Point(8, 65);
+            this.lblFiltroNumDoc.Location = new System.Drawing.Point(560, 72);
             this.lblFiltroNumDoc.Name = "lblFiltroNumDoc";
             this.lblFiltroNumDoc.Size = new System.Drawing.Size(131, 16);
             this.lblFiltroNumDoc.TabIndex = 0;
@@ -212,9 +203,9 @@
             // dgvUsuarios
             // 
             this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUsuarios.Location = new System.Drawing.Point(15, 449);
+            this.dgvUsuarios.Location = new System.Drawing.Point(15, 533);
             this.dgvUsuarios.Name = "dgvUsuarios";
-            this.dgvUsuarios.Size = new System.Drawing.Size(1034, 150);
+            this.dgvUsuarios.Size = new System.Drawing.Size(1034, 129);
             this.dgvUsuarios.TabIndex = 2;
             // 
             // BtnGuardar
@@ -438,7 +429,7 @@
             // 
             this.BtnEditar.BackColor = System.Drawing.Color.Khaki;
             this.BtnEditar.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.BtnEditar.Location = new System.Drawing.Point(384, 624);
+            this.BtnEditar.Location = new System.Drawing.Point(384, 668);
             this.BtnEditar.Name = "BtnEditar";
             this.BtnEditar.Size = new System.Drawing.Size(75, 34);
             this.BtnEditar.TabIndex = 39;
@@ -449,7 +440,7 @@
             // BtnEliminar
             // 
             this.BtnEliminar.BackColor = System.Drawing.Color.Orange;
-            this.BtnEliminar.Location = new System.Drawing.Point(488, 624);
+            this.BtnEliminar.Location = new System.Drawing.Point(486, 668);
             this.BtnEliminar.Name = "BtnEliminar";
             this.BtnEliminar.Size = new System.Drawing.Size(75, 34);
             this.BtnEliminar.TabIndex = 40;
@@ -479,26 +470,24 @@
             this.txtIdUsuario.TabIndex = 46;
             this.txtIdUsuario.Visible = false;
             // 
-            // BtnNuevo
+            // BtnExportarExcel
             // 
-            this.BtnNuevo.BackColor = System.Drawing.Color.Aquamarine;
-            this.BtnNuevo.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnNuevo.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.BtnNuevo.Location = new System.Drawing.Point(518, 289);
-            this.BtnNuevo.Name = "BtnNuevo";
-            this.BtnNuevo.Size = new System.Drawing.Size(101, 34);
-            this.BtnNuevo.TabIndex = 47;
-            this.BtnNuevo.Text = "Nuevo";
-            this.BtnNuevo.UseVisualStyleBackColor = false;
-            this.BtnNuevo.Click += new System.EventHandler(this.BtnNuevo_Click);
+            this.BtnExportarExcel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BtnExportarExcel.Location = new System.Drawing.Point(584, 668);
+            this.BtnExportarExcel.Name = "BtnExportarExcel";
+            this.BtnExportarExcel.Size = new System.Drawing.Size(95, 34);
+            this.BtnExportarExcel.TabIndex = 47;
+            this.BtnExportarExcel.Text = "Exportar  a Excel";
+            this.BtnExportarExcel.UseVisualStyleBackColor = false;
+            this.BtnExportarExcel.Click += new System.EventHandler(this.BtnExportarExcel_Click);
             // 
-            // Usuario
+            // FrmUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1127, 749);
-            this.Controls.Add(this.BtnNuevo);
+            this.Controls.Add(this.BtnExportarExcel);
             this.Controls.Add(this.txtIdUsuario);
             this.Controls.Add(this.txtCelular);
             this.Controls.Add(this.txtTelefono);
@@ -529,7 +518,7 @@
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.dgvUsuarios);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Usuario";
+            this.Name = "FrmUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Usuarios";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -554,7 +543,6 @@
         private System.Windows.Forms.TextBox txtFiltroNumDoc;
         private System.Windows.Forms.Label lblFiltroNumDoc;
         private System.Windows.Forms.Button BtnLimpiar;
-        private System.Windows.Forms.Button BtnBuscar;
         private System.Windows.Forms.DataGridView dgvUsuarios;
         private System.Windows.Forms.Button BtnGuardar;
         private System.Windows.Forms.ComboBox CboCiudad;
@@ -584,6 +572,6 @@
         private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.TextBox txtCelular;
         private System.Windows.Forms.TextBox txtIdUsuario;
-        private System.Windows.Forms.Button BtnNuevo;
+        private System.Windows.Forms.Button BtnExportarExcel;
     }
 }

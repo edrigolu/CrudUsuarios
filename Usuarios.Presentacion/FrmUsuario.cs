@@ -7,52 +7,28 @@ using Usuarios.Negocio;
 
 namespace Usuarios.Presentacion
 {
-    public partial class Usuario : Form
+    public partial class FrmUsuario : Form
     {
         Operaciones operaciones = new Operaciones();
+        UsuariosN usuariosN = new UsuariosN();
         private string IdUsuario = null;
         private bool Editar = false;
-        private bool modo_modificar = false;
         bool respuesta = false;
 
-        public Usuario(Persona ParametroPersona)
+        public FrmUsuario()
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
-
-            if (ParametroPersona != null)
-            {
-                //lblTitulo.Text = "Modificar Registro";
-                modo_modificar = true;
-                txtIdUsuario.Text = ParametroPersona.IdUsuario.ToString();                
-                txtNombre.Text = ParametroPersona.Nombres.ToString();
-                txtApellidos.Text = ParametroPersona.Apellidos.ToString();
-                txtEdad.Text = ParametroPersona.Edad.ToString();
-                txtNumDocumento.Text = ParametroPersona.NumeroDocumento.ToString();
-                CboDepartamento.DataSource = new Operaciones().ObtenerDepartamentos();
-                CboDepartamento.ValueMember = "CodigoDane";
-                CboDepartamento.DisplayMember = "Departamento";
-                Departamentos oDepartamentoSeleccionado = CboDepartamento.SelectedItem as Departamentos;
-                CboCiudad.DataSource = new Operaciones().ObtenerMunicipios(oDepartamentoSeleccionado.CodigoDane);
-                CboCiudad.ValueMember = "IdMunicipio";
-                CboCiudad.DisplayMember = "Municipio";
-                txtDireccion.Text = ParametroPersona.Direccion.ToString();
-                txtTelefono.Text = ParametroPersona.Telefono.ToString();
-                txtCelular.Text = ParametroPersona.Celular.ToString();
-                txtCorreo.Text = ParametroPersona.Correo.ToString();
-                txtOcupacion.Text = ParametroPersona.Ocupacion.ToString();
-            }
-            else
-            {
-                txtIdUsuario.Text = "0";
-            }
         }
+
+
 
         private void FrmUsuarios_Load(object sender, EventArgs e)
         {
             ListarDepartamentos();
             ListarTipoDocumento();
-            //MostrarUsuarios();
+            MostrarUsuarios();
+            LimpiarFiltros();
             lblFiltroNombre.Visible = false;
             txtFiltroNombre.Visible = false;
             lblFiltroApellido.Visible = false;
@@ -61,18 +37,17 @@ namespace Usuarios.Presentacion
             txtFiltroNumDoc.Visible = false;
         }
 
-        //private void MostrarUsuarios()
-        //{
-        //    List<UsuarioViewModel> oListarUsuarios = new Operaciones().ObtenerUsuarios();
-
-        //    dgvUsuarios.DataSource = null;
-        //    dgvUsuarios.Columns.Clear();
-        //    dgvUsuarios.Rows.Clear();
-        //    dgvUsuarios.Refresh();
-        //    dgvUsuarios.DataSource = oListarUsuarios;
-        //    dgvUsuarios.Columns["IdUsuario"].Visible = true;
-        //    dgvUsuarios.Columns["Activo"].Visible = false;
-        //}
+        private void MostrarUsuarios()
+        {
+            List<PersonaViewModel> oListarUsuarios = new Operaciones().ObtenerUsuarios();
+            dgvUsuarios.DataSource = null;
+            dgvUsuarios.Columns.Clear();
+            dgvUsuarios.Rows.Clear();
+            dgvUsuarios.Refresh();
+            dgvUsuarios.DataSource = oListarUsuarios;
+            dgvUsuarios.Columns["IdUsuario"].Visible = true;
+            dgvUsuarios.Columns["Activo"].Visible = false;
+        }
 
         private void ListarTipoDocumento()
         {
@@ -90,6 +65,11 @@ namespace Usuarios.Presentacion
 
         private void BtnLimpiar_Click(object sender, EventArgs e)
         {
+            LimpiarFiltros();           
+        }
+
+        private void LimpiarFiltros()
+        {
             lblFiltroNombre.Visible = false;
             txtFiltroNombre.Visible = false;
             lblFiltroApellido.Visible = false;
@@ -99,6 +79,9 @@ namespace Usuarios.Presentacion
             RdbApellidos.Checked = false;
             RdbNombre.Checked = false;
             RdbNumDocumento.Checked = false;
+            txtFiltroNumDoc.Text = string.Empty;
+            txtFiltroNombre.Text = string.Empty;
+            txtFiltroApellido.Text = string.Empty;
         }
 
         private void RdbNombre_Click(object sender, EventArgs e)
@@ -150,7 +133,7 @@ namespace Usuarios.Presentacion
 
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
-            Persona persona = new Entidades.Persona
+            Persona persona = new Persona
             {
                 IdUsuario = Convert.ToInt32(txtIdUsuario.Text.ToString()),
                 Nombres = txtNombre.Text,
@@ -175,7 +158,7 @@ namespace Usuarios.Presentacion
                     respuesta = new Operaciones().CrearUsuario(persona);
                     MessageBox.Show("Insertado  correctamente.", "Insertar", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LimpiarFormulario();
-                    //MostrarUsuarios();
+                    MostrarUsuarios();
                 }
                 catch (Exception ex)
                 {
@@ -189,7 +172,7 @@ namespace Usuarios.Presentacion
                     respuesta = new Operaciones().Modificar(persona);
                     MessageBox.Show("Modificado  correctamente.", "Modificar", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LimpiarFormulario();
-                    //MostrarUsuarios();
+                    MostrarUsuarios();
                     Editar = false;
                 }
                 catch (Exception ex)
@@ -233,7 +216,7 @@ namespace Usuarios.Presentacion
                 txtTelefono.Text = dgvUsuarios.CurrentRow.Cells["Telefono"].Value.ToString();
                 txtCelular.Text = dgvUsuarios.CurrentRow.Cells["Celular"].Value.ToString();
                 txtCorreo.Text = dgvUsuarios.CurrentRow.Cells["Correo"].Value.ToString();
-                txtOcupacion.Text = dgvUsuarios.CurrentRow.Cells["Ocupacion"].Value.ToString();                
+                txtOcupacion.Text = dgvUsuarios.CurrentRow.Cells["Ocupacion"].Value.ToString();
             }
             else
             {
@@ -246,23 +229,74 @@ namespace Usuarios.Presentacion
             if (dgvUsuarios.SelectedRows.Count > 0)
             {
                 IdUsuario = dgvUsuarios.CurrentRow.Cells["IdUsuario"].Value.ToString();
-                UsuariosN usuariosN = new UsuariosN();
+                
                 usuariosN.Eliminar(Convert.ToInt32(IdUsuario).ToString());
                 MessageBox.Show("Eliminado correctamente.", "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //MostrarUsuarios();
+                MostrarUsuarios();
             }
             else
             {
                 MessageBox.Show("Seleccione la fila.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
         }
 
-        private void BtnNuevo_Click(object sender, EventArgs e)
+        private void BtnExportarExcel_Click(object sender, EventArgs e)
         {
-            Usuario formUsuario = new Usuario(null);
-            formUsuario.ShowDialog();
-            //MostrarUsuarios();
+
+            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+            app.Visible = false;
+            worksheet = workbook.Sheets["Hoja1"];
+            worksheet = workbook.ActiveSheet;
+            worksheet.Name = "Usuarios";
+            // Cabeceras
+            for (int i = 1; i < dgvUsuarios.Columns.Count + 1; i++)
+            {
+                if (i > 1 && i < dgvUsuarios.Columns.Count)
+                {
+                    worksheet.Cells[1, i] = dgvUsuarios.Columns[i - 1].HeaderText;
+                }
+            }
+            // Valores
+            for (int i = 0; i < dgvUsuarios.Rows.Count - 1; i++)
+            {
+                for (int j = 0; j < dgvUsuarios.Columns.Count; j++)
+                {
+                    if (j > 0 && j < dgvUsuarios.Columns.Count - 1)
+                    {
+                        worksheet.Cells[i + 2, j + 1] = dgvUsuarios.Rows[i].Cells[j].Value.ToString();
+                    }
+                }
+            }
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Archivos de Excel|*.xlsx",
+                Title = "Guardar archivo",
+                FileName = "NombredeArchivoDefault"
+            };
+            saveFileDialog.ShowDialog();
+            if (saveFileDialog.FileName != "")
+            {
+                Console.WriteLine("Ruta en: " + saveFileDialog.FileName);
+                workbook.SaveAs(saveFileDialog.FileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                app.Quit();
+            }
+        }
+
+        private void txtFiltroNombre_TextChanged(object sender, EventArgs e)
+        {
+            dgvUsuarios.DataSource= operaciones.FiltrarNombre(txtFiltroNombre.Text);
+        }
+
+        private void txtFiltroApellido_TextChanged(object sender, EventArgs e)
+        {
+            dgvUsuarios.DataSource = operaciones.FiltrarApellido(txtFiltroApellido.Text);
+        }
+
+        private void txtFiltroNumDoc_TextChanged(object sender, EventArgs e)
+        {
+            dgvUsuarios.DataSource = operaciones.FiltrarNumDocumento(txtFiltroNumDoc.Text);
         }
     }
 }

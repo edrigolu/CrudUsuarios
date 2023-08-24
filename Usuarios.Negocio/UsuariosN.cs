@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using Usuarios.Datos.Data;
 using Usuarios.Entidades;
 
@@ -7,8 +8,8 @@ namespace Usuarios.Negocio
     public class UsuariosN
     {
         private readonly Operaciones operaciones = new Operaciones();
+        readonly Persona usuario = new Persona();
 
-        
         public void MostrarDepartamentos()
         {
             operaciones.ObtenerDepartamentos();
@@ -25,11 +26,10 @@ namespace Usuarios.Negocio
         }
 
         public void Insertar()
-        {
-            Entidades.Persona usuario = new Entidades.Persona();
+        {            
             operaciones.CrearUsuario(usuario);
         }
-
+        
         //public void Editar()
         //{
         //    Usuario usuario = new Usuario();
