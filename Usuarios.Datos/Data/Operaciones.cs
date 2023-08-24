@@ -242,7 +242,7 @@ namespace Usuarios.Datos.Data
             return oListarUsuarios;
         }
 
-        public bool Modificar(Entidades.Persona usuario)
+        public bool Modificar(Persona usuario)
         {
             bool respuesta = true;
             using (SqlConnection oConexion = new SqlConnection(Configuracion.Conexion))

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using Usuarios.Datos.Data;
 using Usuarios.Entidades;
 
@@ -25,16 +24,15 @@ namespace Usuarios.Negocio
             operaciones.ObtenerTipoDocumento();
         }
 
-        public void Insertar()
+        public void Crear()
         {            
             operaciones.CrearUsuario(usuario);
         }
-        
-        //public void Editar()
-        //{
-        //    Usuario usuario = new Usuario();
-        //    operaciones.Editar();
-        //}
+
+        public void Modificar()
+        {            
+            operaciones.Modificar(usuario);
+        }
 
         public void Eliminar(string idUsuario)
         {

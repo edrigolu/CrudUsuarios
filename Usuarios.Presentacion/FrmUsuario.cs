@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Usuarios.Datos.Data;
 using Usuarios.Entidades;
-using Usuarios.Negocio;
 
 namespace Usuarios.Presentacion
 {
     public partial class FrmUsuario : Form
     {
-        Operaciones operaciones = new Operaciones();
-        UsuariosN usuariosN = new UsuariosN();
-        private string IdUsuario = null;
+        Operaciones operaciones = new Operaciones();        
+        private string IdUsuario = string.Empty;
         private bool Editar = false;
         bool respuesta = false;
 
@@ -45,7 +43,7 @@ namespace Usuarios.Presentacion
             dgvUsuarios.Rows.Clear();
             dgvUsuarios.Refresh();
             dgvUsuarios.DataSource = oListarUsuarios;
-            dgvUsuarios.Columns["IdUsuario"].Visible = true;
+            dgvUsuarios.Columns[0].Visible=false;
             dgvUsuarios.Columns["Activo"].Visible = false;
         }
 
@@ -65,7 +63,7 @@ namespace Usuarios.Presentacion
 
         private void BtnLimpiar_Click(object sender, EventArgs e)
         {
-            LimpiarFiltros();           
+            LimpiarFiltros();
         }
 
         private void LimpiarFiltros()
@@ -135,7 +133,7 @@ namespace Usuarios.Presentacion
         {
             Persona persona = new Persona
             {
-                IdUsuario = Convert.ToInt32(txtIdUsuario.Text.ToString()),
+               IdUsuario = Convert.ToInt32(txtIdUsuario.Text.ToString()),
                 Nombres = txtNombre.Text,
                 Apellidos = txtApellidos.Text,
                 Edad = txtEdad.Text,
@@ -200,11 +198,12 @@ namespace Usuarios.Presentacion
             if (dgvUsuarios.SelectedRows.Count > 0)
             {
                 Editar = true;
-                txtIdUsuario.Text = dgvUsuarios.CurrentRow.Cells["IdUsuario"].Value.ToString();
-                txtNombre.Text = dgvUsuarios.CurrentRow.Cells["Nombres"].Value.ToString();
-                txtApellidos.Text = dgvUsuarios.CurrentRow.Cells["Apellidos"].Value.ToString();
-                txtEdad.Text = dgvUsuarios.CurrentRow.Cells["Edad"].Value.ToString();
-                txtNumDocumento.Text = dgvUsuarios.CurrentRow.Cells["NumeroDocumento"].Value.ToString();
+                txtIdUsuario.Text= dgvUsuarios.CurrentRow.Cells[0].Value.ToString();
+                //IdUsuario = dgvUsuarios.CurrentRow.Cells[0].Value.ToString();
+                txtNombre.Text = dgvUsuarios.CurrentRow.Cells[1].Value.ToString();                
+                txtApellidos.Text = dgvUsuarios.CurrentRow.Cells[2].Value.ToString();
+                txtEdad.Text = dgvUsuarios.CurrentRow.Cells[3].Value.ToString();
+                txtNumDocumento.Text = dgvUsuarios.CurrentRow.Cells[4].Value.ToString();
                 CboDepartamento.DataSource = new Operaciones().ObtenerDepartamentos();
                 CboDepartamento.ValueMember = "CodigoDane";
                 CboDepartamento.DisplayMember = "Departamento";
@@ -212,11 +211,13 @@ namespace Usuarios.Presentacion
                 CboCiudad.DataSource = new Operaciones().ObtenerMunicipios(oDepartamentoSeleccionado.CodigoDane);
                 CboCiudad.ValueMember = "IdMunicipio";
                 CboCiudad.DisplayMember = "Municipio";
-                txtDireccion.Text = dgvUsuarios.CurrentRow.Cells["Direccion"].Value.ToString();
-                txtTelefono.Text = dgvUsuarios.CurrentRow.Cells["Telefono"].Value.ToString();
-                txtCelular.Text = dgvUsuarios.CurrentRow.Cells["Celular"].Value.ToString();
-                txtCorreo.Text = dgvUsuarios.CurrentRow.Cells["Correo"].Value.ToString();
-                txtOcupacion.Text = dgvUsuarios.CurrentRow.Cells["Ocupacion"].Value.ToString();
+
+                txtDireccion.Text = dgvUsuarios.CurrentRow.Cells[8].Value.ToString();
+                txtTelefono.Text = dgvUsuarios.CurrentRow.Cells[9].Value.ToString();
+                txtCelular.Text = dgvUsuarios.CurrentRow.Cells[10].Value.ToString();
+                txtCorreo.Text = dgvUsuarios.CurrentRow.Cells[11].Value.ToString();
+                txtOcupacion.Text = dgvUsuarios.CurrentRow.Cells[12].Value.ToString();               
+                
             }
             else
             {
@@ -229,8 +230,7 @@ namespace Usuarios.Presentacion
             if (dgvUsuarios.SelectedRows.Count > 0)
             {
                 IdUsuario = dgvUsuarios.CurrentRow.Cells["IdUsuario"].Value.ToString();
-                
-                usuariosN.Eliminar(Convert.ToInt32(IdUsuario).ToString());
+                operaciones.Eliminar(Convert.ToInt32(IdUsuario).ToString());
                 MessageBox.Show("Eliminado correctamente.", "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 MostrarUsuarios();
             }
@@ -286,7 +286,7 @@ namespace Usuarios.Presentacion
 
         private void txtFiltroNombre_TextChanged(object sender, EventArgs e)
         {
-            dgvUsuarios.DataSource= operaciones.FiltrarNombre(txtFiltroNombre.Text);
+            dgvUsuarios.DataSource = operaciones.FiltrarNombre(txtFiltroNombre.Text);
         }
 
         private void txtFiltroApellido_TextChanged(object sender, EventArgs e)
