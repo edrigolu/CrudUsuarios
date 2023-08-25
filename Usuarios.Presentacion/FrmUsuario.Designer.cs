@@ -253,6 +253,7 @@
             this.txtEdad.Name = "txtEdad";
             this.txtEdad.Size = new System.Drawing.Size(51, 26);
             this.txtEdad.TabIndex = 27;
+            this.txtEdad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEdad_KeyPress);
             // 
             // txtNumDocumento
             // 
@@ -261,6 +262,8 @@
             this.txtNumDocumento.Name = "txtNumDocumento";
             this.txtNumDocumento.Size = new System.Drawing.Size(235, 26);
             this.txtNumDocumento.TabIndex = 29;
+            this.txtNumDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumDocumento_KeyPress);
+            this.txtNumDocumento.Leave += new System.EventHandler(this.txtNumDocumento_Leave);
             // 
             // txtApellidos
             // 
@@ -269,6 +272,7 @@
             this.txtApellidos.Name = "txtApellidos";
             this.txtApellidos.Size = new System.Drawing.Size(265, 26);
             this.txtApellidos.TabIndex = 26;
+            this.txtApellidos.Leave += new System.EventHandler(this.txtApellidos_Leave);
             // 
             // label4
             // 
@@ -298,6 +302,7 @@
             this.txtOcupacion.Name = "txtOcupacion";
             this.txtOcupacion.Size = new System.Drawing.Size(266, 26);
             this.txtOcupacion.TabIndex = 36;
+            this.txtOcupacion.Leave += new System.EventHandler(this.txtOcupacion_Leave);
             // 
             // txtCorreo
             // 
@@ -307,6 +312,7 @@
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(310, 26);
             this.txtCorreo.TabIndex = 35;
+            this.txtCorreo.Leave += new System.EventHandler(this.txtCorreo_Leave);
             // 
             // txtDireccion
             // 
@@ -316,6 +322,7 @@
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(273, 26);
             this.txtDireccion.TabIndex = 32;
+            this.txtDireccion.Leave += new System.EventHandler(this.txtDireccion_Leave);
             // 
             // txtNombre
             // 
@@ -324,6 +331,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(281, 26);
             this.txtNombre.TabIndex = 25;
+            this.txtNombre.Leave += new System.EventHandler(this.txtNombre_Leave);
             // 
             // label11
             // 
@@ -454,6 +462,8 @@
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(301, 20);
             this.txtTelefono.TabIndex = 43;
+            this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
+            this.txtTelefono.Leave += new System.EventHandler(this.txtTelefono_Leave);
             // 
             // txtCelular
             // 
@@ -461,6 +471,8 @@
             this.txtCelular.Name = "txtCelular";
             this.txtCelular.Size = new System.Drawing.Size(286, 20);
             this.txtCelular.TabIndex = 44;
+            this.txtCelular.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCelular_KeyPress);
+            this.txtCelular.Leave += new System.EventHandler(this.txtCelular_Leave);
             // 
             // txtIdUsuario
             // 

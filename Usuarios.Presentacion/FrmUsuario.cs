@@ -8,6 +8,7 @@ namespace Usuarios.Presentacion
 {
     public partial class FrmUsuario : Form
     {
+        private readonly ErrorProvider errorProvider = new ErrorProvider();
         Operaciones operaciones = new Operaciones();        
         private string IdUsuario = string.Empty;
         private bool Editar = false;
@@ -18,8 +19,6 @@ namespace Usuarios.Presentacion
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
         }
-
-
 
         private void FrmUsuarios_Load(object sender, EventArgs e)
         {
@@ -297,6 +296,156 @@ namespace Usuarios.Presentacion
         private void txtFiltroNumDoc_TextChanged(object sender, EventArgs e)
         {
             dgvUsuarios.DataSource = operaciones.FiltrarNumDocumento(txtFiltroNumDoc.Text);
+        }
+
+       
+        private void txtNumDocumento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            bool valida=Validador.SoloNumeros(e);
+            if(!valida)
+            {
+                errorProvider.SetError(txtNumDocumento, "Unicamente numeros");
+            }
+            else
+            {
+                errorProvider.Clear();
+            }
+        }
+
+        private void txtCelular_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            bool valida = Validador.SoloNumeros(e);
+            if (!valida)
+            {
+                errorProvider.SetError(txtCelular, "Unicamente numeros");
+            }
+            else
+            {
+                errorProvider.Clear();
+            }
+        }
+
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            bool valida = Validador.SoloNumeros(e);
+            if (!valida)
+            {
+                errorProvider.SetError(txtTelefono, "Unicamente numeros");
+            }
+            else
+            {
+                errorProvider.Clear();
+            }
+        }
+
+        private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            bool valida = Validador.SoloNumeros(e);
+            if (!valida)
+            {
+                errorProvider.SetError(txtEdad, "Unicamente numeros");
+            }
+            else
+            {
+                errorProvider.Clear();
+            }
+        }
+
+        private void txtNombre_Leave(object sender, EventArgs e)
+        {
+            if (Validador.TextBoxVacios(txtNombre))
+            {
+                errorProvider.SetError(txtNombre, "No puede estar vacio.");
+            }
+            else
+            {
+                errorProvider.Clear();
+            }
+        }
+
+        private void txtApellidos_Leave(object sender, EventArgs e)
+        {
+            if (Validador.TextBoxVacios(txtApellidos))
+            {
+                errorProvider.SetError(txtApellidos, "No puede estar vacio.");
+            }
+            else
+            {
+                errorProvider.Clear();
+            }
+        }
+
+        private void txtNumDocumento_Leave(object sender, EventArgs e)
+        {
+            if (Validador.TextBoxVacios(txtNumDocumento))
+            {
+                errorProvider.SetError(txtNumDocumento, "No puede estar vacio.");
+            }
+            else
+            {
+                errorProvider.Clear();
+            }
+        }
+
+        private void txtDireccion_Leave(object sender, EventArgs e)
+        {
+            if (Validador.TextBoxVacios(txtDireccion))
+            {
+                errorProvider.SetError(txtDireccion, "No puede estar vacio.");
+            }
+            else
+            {
+                errorProvider.Clear();
+            }
+        }
+
+        private void txtTelefono_Leave(object sender, EventArgs e)
+        {
+            if (Validador.TextBoxVacios(txtTelefono))
+            {
+                errorProvider.SetError(txtTelefono, "No puede estar vacio.");
+            }
+            else
+            {
+                errorProvider.Clear();
+            }
+        }
+
+        private void txtCelular_Leave(object sender, EventArgs e)
+        {
+            if (Validador.TextBoxVacios(txtCelular))
+            {
+                errorProvider.SetError(txtCelular, "No puede estar vacio.");
+            }
+            else
+            {
+                errorProvider.Clear();
+            }
+        }
+
+        private void txtCorreo_Leave(object sender, EventArgs e)
+        {
+            if (!Validador.ValidarCorreo(txtCorreo.Text))
+            {
+                errorProvider.SetError(txtCorreo, "Correo no válido.");
+            }
+            else
+            {
+                errorProvider.Clear();
+            }           
+        }
+
+        private void txtOcupacion_Leave(object sender, EventArgs e)
+        {
+
+            if (Validador.TextBoxVacios(txtOcupacion))
+            {
+                errorProvider.SetError(txtOcupacion, "No puede estar vacio.");
+            }
+            else
+            {
+                errorProvider.Clear();
+            }
         }
     }
 }
