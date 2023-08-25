@@ -35,6 +35,7 @@ namespace Usuarios.Presentacion
             txtFiltroApellido.Visible = false;
             lblFiltroNumDoc.Visible = false;
             txtFiltroNumDoc.Visible = false;
+            txtNombre.Focus();
             BtnGuardar.Enabled = true;
         }
 
