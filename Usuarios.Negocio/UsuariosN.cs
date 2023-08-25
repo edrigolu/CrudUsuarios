@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using Usuarios.Datos.Data;
 using Usuarios.Entidades;
 
@@ -7,36 +9,51 @@ namespace Usuarios.Negocio
     public class UsuariosN
     {
         private readonly Operaciones operaciones = new Operaciones();
-        readonly Persona usuario = new Persona();
+        readonly Persona usuario = new Persona();        
 
-        public void MostrarDepartamentos()
+        public List<Departamentos> ListarDepartamentos()
         {
-            operaciones.ObtenerDepartamentos();
+           return operaciones.ListarDepartamentos();
         }
 
-        public void MostrarUsuarios()
+        public List<PersonaViewModel> ListarUsuarios()
         {
-            operaciones.ObtenerUsuarios();
+           return operaciones.ListarUsuarios();
         }
 
-        public void ObtenerTipoDocumento()
+        public List<TiposDocumento> ListarTipoDocumento()
         {
-            operaciones.ObtenerTipoDocumento();
+           return operaciones.ListarTipoDocumento();
         }
 
-        public void Crear()
+        public bool CrearUsuario(Persona usuario)
         {            
-            operaciones.CrearUsuario(usuario);
+           return operaciones.CrearUsuario(usuario);
         }
 
-        public void Modificar()
+        public bool Modificar(Persona usuario)
         {            
-            operaciones.Modificar(usuario);
+           return operaciones.Modificar(usuario);
         }
 
         public void Eliminar(string idUsuario)
         {
             operaciones.Eliminar(Convert.ToInt32(idUsuario).ToString());
+        }
+
+        public DataTable FiltrarNombre(string nombre)
+        {
+            return operaciones.FiltrarNombre(nombre);
+        }
+
+       public DataTable FiltrarApellido(string apellido)
+        {
+            return operaciones.FiltrarApellido(apellido);
+        }
+
+        public DataTable FiltrarNumDocumento(string numerodocumento)
+        {
+            return operaciones.FiltrarNumDocumento(numerodocumento);
         }
     }
 }

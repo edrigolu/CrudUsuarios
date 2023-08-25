@@ -23,17 +23,17 @@ namespace Usuarios.Datos.Data
             }
         }
 
-        public  DataTable FiltrarNombre(string nombre)
+        public DataTable FiltrarNombre(string nombre)
         {
             using (SqlConnection oConexion = new SqlConnection(Configuracion.Conexion))
             {
                 SqlCommand comando = new SqlCommand("PA_FiltrarPorNombre", oConexion)
                 {
                     CommandType = CommandType.StoredProcedure
-                };               
+                };
                 comando.Parameters.AddWithValue("@Nombre", nombre);
                 oConexion.Open();
-                comando.ExecuteNonQuery();                
+                comando.ExecuteNonQuery();
                 DataTable dt = new DataTable();
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(comando);
                 sqlDataAdapter.Fill(dt);
@@ -41,7 +41,6 @@ namespace Usuarios.Datos.Data
                 return dt;
             }
         }
-
 
         public DataTable FiltrarApellido(string apellido)
         {
@@ -53,7 +52,7 @@ namespace Usuarios.Datos.Data
                 };
                 comando.Parameters.AddWithValue("@Apellidos", apellido);
                 oConexion.Open();
-                comando.ExecuteNonQuery();               
+                comando.ExecuteNonQuery();
                 DataTable dt = new DataTable();
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(comando);
                 sqlDataAdapter.Fill(dt);
@@ -73,7 +72,7 @@ namespace Usuarios.Datos.Data
                 comando.Parameters.AddWithValue("@NumDoc", numerodocumento);
                 oConexion.Open();
                 comando.ExecuteNonQuery();
-                
+
                 DataTable dt = new DataTable();
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(comando);
                 sqlDataAdapter.Fill(dt);
@@ -150,7 +149,7 @@ namespace Usuarios.Datos.Data
             return oListarMunicipios;
         }
 
-        public List<Departamentos> ObtenerDepartamentos()
+        public List<Departamentos> ListarDepartamentos()
         {
             List<Departamentos> oListarDepartamentos = new List<Departamentos>();
             using (SqlConnection oConexion = new SqlConnection(Configuracion.Conexion))
@@ -177,7 +176,7 @@ namespace Usuarios.Datos.Data
             return oListarDepartamentos;
         }
 
-        public List<TiposDocumento> ObtenerTipoDocumento()
+        public List<TiposDocumento> ListarTipoDocumento()
         {
             List<TiposDocumento> oListarTiposDocumento = new List<TiposDocumento>();
             using (SqlConnection oConexion = new SqlConnection(Configuracion.Conexion))
@@ -204,7 +203,7 @@ namespace Usuarios.Datos.Data
             return oListarTiposDocumento;
         }
 
-        public List<PersonaViewModel> ObtenerUsuarios()
+        public List<PersonaViewModel> ListarUsuarios()
         {
             List<PersonaViewModel> oListarUsuarios = new List<PersonaViewModel>();
             using (SqlConnection oConexion = new SqlConnection(Configuracion.Conexion))
@@ -258,9 +257,9 @@ namespace Usuarios.Datos.Data
                     comando.Parameters.AddWithValue("Apellidos", usuario.Apellidos);
                     comando.Parameters.AddWithValue("Edad", usuario.Edad);
                     comando.Parameters.AddWithValue("NumeroDocumento", usuario.NumeroDocumento);
-                    comando.Parameters.AddWithValue("IdTipoDocumento", Convert.ToInt32(usuario.IdTipoDocumento));
-                    comando.Parameters.AddWithValue("IdCiudadResidencia", Convert.ToInt32(usuario.IdCiudadResidencia));
-                    comando.Parameters.AddWithValue("IdDepartamentoResidencia", Convert.ToInt32(usuario.IdDepartamentoResidencia));
+                    comando.Parameters.AddWithValue("IdTipoDocumento", usuario.IdTipoDocumento);
+                    comando.Parameters.AddWithValue("IdCiudadResidencia", usuario.IdCiudadResidencia);
+                    comando.Parameters.AddWithValue("IdDepartamentoResidencia", usuario.IdDepartamentoResidencia);
                     comando.Parameters.AddWithValue("Direccion", usuario.Direccion);
                     comando.Parameters.AddWithValue("Telefono", usuario.Telefono);
                     comando.Parameters.AddWithValue("Celular", usuario.Celular);

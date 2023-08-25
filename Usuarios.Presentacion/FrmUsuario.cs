@@ -1,15 +1,18 @@
-﻿using System;
+﻿using SpreadsheetLight;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Usuarios.Datos.Data;
 using Usuarios.Entidades;
+using Usuarios.Negocio;
 
 namespace Usuarios.Presentacion
 {
     public partial class FrmUsuario : Form
     {
         private readonly ErrorProvider errorProvider = new ErrorProvider();
-        Operaciones operaciones = new Operaciones();        
+        Operaciones operaciones = new Operaciones();
+        UsuariosN usuariosN = new UsuariosN();
         private string IdUsuario = string.Empty;
         private bool Editar = false;
         bool respuesta = false;
@@ -32,30 +35,31 @@ namespace Usuarios.Presentacion
             txtFiltroApellido.Visible = false;
             lblFiltroNumDoc.Visible = false;
             txtFiltroNumDoc.Visible = false;
+            BtnGuardar.Enabled = false;
         }
 
         private void MostrarUsuarios()
         {
-            List<PersonaViewModel> oListarUsuarios = new Operaciones().ObtenerUsuarios();
+            List<PersonaViewModel> oListarUsuarios = usuariosN.ListarUsuarios();
             dgvUsuarios.DataSource = null;
             dgvUsuarios.Columns.Clear();
             dgvUsuarios.Rows.Clear();
             dgvUsuarios.Refresh();
             dgvUsuarios.DataSource = oListarUsuarios;
-            dgvUsuarios.Columns[0].Visible=false;
+            dgvUsuarios.Columns[0].Visible = false;
             dgvUsuarios.Columns["Activo"].Visible = false;
         }
 
         private void ListarTipoDocumento()
         {
-            CboTipoDocumento.DataSource = new Operaciones().ObtenerTipoDocumento();
+            CboTipoDocumento.DataSource = usuariosN.ListarTipoDocumento();
             CboTipoDocumento.ValueMember = "IdTipoDocumento";
             CboTipoDocumento.DisplayMember = "TipoDocumento";
         }
 
         private void ListarDepartamentos()
         {
-            CboDepartamento.DataSource = new Operaciones().ObtenerDepartamentos();
+            CboDepartamento.DataSource = usuariosN.ListarDepartamentos();
             CboDepartamento.ValueMember = "CodigoDane";
             CboDepartamento.DisplayMember = "Departamento";
         }
@@ -122,37 +126,40 @@ namespace Usuarios.Presentacion
 
         private void CboDepartamento_SelectedIndexChanged(object sender, EventArgs e)
         {
+            CargarDepartamentosPorMunicipios();
+        }
+
+        private void CargarDepartamentosPorMunicipios()
+        {
             Departamentos oDepartamentoSeleccionado = CboDepartamento.SelectedItem as Departamentos;
-            CboCiudad.DataSource = new Operaciones().ObtenerMunicipios(oDepartamentoSeleccionado.CodigoDane);
+            CboCiudad.DataSource = operaciones.ObtenerMunicipios(oDepartamentoSeleccionado.CodigoDane);
             CboCiudad.ValueMember = "IdMunicipio";
             CboCiudad.DisplayMember = "Municipio";
         }
 
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
-            Persona persona = new Persona
-            {
-               IdUsuario = Convert.ToInt32(txtIdUsuario.Text.ToString()),
-                Nombres = txtNombre.Text,
-                Apellidos = txtApellidos.Text,
-                Edad = txtEdad.Text,
-                NumeroDocumento = txtNumDocumento.Text,
-                IdTipoDocumento = Convert.ToInt32(CboTipoDocumento.SelectedValue),
-                IdCiudadResidencia = Convert.ToInt32(CboCiudad.SelectedValue),
-                IdDepartamentoResidencia = Convert.ToInt32(CboDepartamento.SelectedValue),
-                Direccion = txtDireccion.Text,
-                Telefono = txtTelefono.Text,
-                Celular = txtCelular.Text,
-                Correo = txtCorreo.Text,
-                Ocupacion = txtOcupacion.Text,
-                Activo = true
-            };
-
             if (Editar == false)
             {
+                Persona persona = new Persona
+                {
+                    Nombres = txtNombre.Text,
+                    Apellidos = txtApellidos.Text,
+                    Edad = txtEdad.Text,
+                    NumeroDocumento = txtNumDocumento.Text,
+                    IdTipoDocumento = Convert.ToInt32(CboTipoDocumento.SelectedValue),
+                    IdCiudadResidencia = Convert.ToInt32(CboCiudad.SelectedValue),
+                    IdDepartamentoResidencia = Convert.ToInt32(CboDepartamento.SelectedValue),
+                    Direccion = txtDireccion.Text,
+                    Telefono = txtTelefono.Text,
+                    Celular = txtCelular.Text,
+                    Correo = txtCorreo.Text,
+                    Ocupacion = txtOcupacion.Text,
+                    Activo = true
+                };
                 try
                 {
-                    respuesta = new Operaciones().CrearUsuario(persona);
+                    respuesta = usuariosN.CrearUsuario(persona);
                     MessageBox.Show("Insertado  correctamente.", "Insertar", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LimpiarFormulario();
                     MostrarUsuarios();
@@ -164,9 +171,26 @@ namespace Usuarios.Presentacion
             }
             if (Editar == true)
             {
+                Persona personaModificar = new Persona
+                {
+                    IdUsuario = Convert.ToInt32(txtIdUsuario.Text.ToString()),
+                    Nombres = txtNombre.Text,
+                    Apellidos = txtApellidos.Text,
+                    Edad = txtEdad.Text,
+                    NumeroDocumento = txtNumDocumento.Text,
+                    IdTipoDocumento = Convert.ToInt32(CboTipoDocumento.SelectedValue),
+                    IdCiudadResidencia = Convert.ToInt32(CboCiudad.SelectedValue),
+                    IdDepartamentoResidencia = Convert.ToInt32(CboDepartamento.SelectedValue),
+                    Direccion = txtDireccion.Text,
+                    Telefono = txtTelefono.Text,
+                    Celular = txtCelular.Text,
+                    Correo = txtCorreo.Text,
+                    Ocupacion = txtOcupacion.Text,
+                    Activo = true
+                };
                 try
                 {
-                    respuesta = new Operaciones().Modificar(persona);
+                    respuesta = usuariosN.Modificar(personaModificar);
                     MessageBox.Show("Modificado  correctamente.", "Modificar", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LimpiarFormulario();
                     MostrarUsuarios();
@@ -190,6 +214,9 @@ namespace Usuarios.Presentacion
             txtNumDocumento.Clear();
             txtOcupacion.Clear();
             txtTelefono.Clear();
+            txtCorreo.Clear();
+            ListarDepartamentos();
+            ListarTipoDocumento();
         }
 
         private void BtnEditar_Click(object sender, EventArgs e)
@@ -197,26 +224,19 @@ namespace Usuarios.Presentacion
             if (dgvUsuarios.SelectedRows.Count > 0)
             {
                 Editar = true;
-                txtIdUsuario.Text= dgvUsuarios.CurrentRow.Cells[0].Value.ToString();
-                //IdUsuario = dgvUsuarios.CurrentRow.Cells[0].Value.ToString();
-                txtNombre.Text = dgvUsuarios.CurrentRow.Cells[1].Value.ToString();                
+                txtNombre.Text = dgvUsuarios.CurrentRow.Cells[1].Value.ToString();
                 txtApellidos.Text = dgvUsuarios.CurrentRow.Cells[2].Value.ToString();
                 txtEdad.Text = dgvUsuarios.CurrentRow.Cells[3].Value.ToString();
                 txtNumDocumento.Text = dgvUsuarios.CurrentRow.Cells[4].Value.ToString();
-                CboDepartamento.DataSource = new Operaciones().ObtenerDepartamentos();
-                CboDepartamento.ValueMember = "CodigoDane";
-                CboDepartamento.DisplayMember = "Departamento";
-                Departamentos oDepartamentoSeleccionado = CboDepartamento.SelectedItem as Departamentos;
-                CboCiudad.DataSource = new Operaciones().ObtenerMunicipios(oDepartamentoSeleccionado.CodigoDane);
-                CboCiudad.ValueMember = "IdMunicipio";
-                CboCiudad.DisplayMember = "Municipio";
-
+                CboTipoDocumento.Text = dgvUsuarios.CurrentRow.Cells[5].Value.ToString();
+                CboDepartamento.Text = dgvUsuarios.CurrentRow.Cells[6].Value.ToString();
+                CboCiudad.Text = dgvUsuarios.CurrentRow.Cells[7].Value.ToString();
                 txtDireccion.Text = dgvUsuarios.CurrentRow.Cells[8].Value.ToString();
                 txtTelefono.Text = dgvUsuarios.CurrentRow.Cells[9].Value.ToString();
                 txtCelular.Text = dgvUsuarios.CurrentRow.Cells[10].Value.ToString();
                 txtCorreo.Text = dgvUsuarios.CurrentRow.Cells[11].Value.ToString();
-                txtOcupacion.Text = dgvUsuarios.CurrentRow.Cells[12].Value.ToString();               
-                
+                txtOcupacion.Text = dgvUsuarios.CurrentRow.Cells[12].Value.ToString();
+                txtIdUsuario.Text = dgvUsuarios.CurrentRow.Cells[0].Value.ToString();
             }
             else
             {
@@ -229,7 +249,7 @@ namespace Usuarios.Presentacion
             if (dgvUsuarios.SelectedRows.Count > 0)
             {
                 IdUsuario = dgvUsuarios.CurrentRow.Cells["IdUsuario"].Value.ToString();
-                operaciones.Eliminar(Convert.ToInt32(IdUsuario).ToString());
+                usuariosN.Eliminar(Convert.ToInt32(IdUsuario).ToString());
                 MessageBox.Show("Eliminado correctamente.", "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 MostrarUsuarios();
             }
@@ -258,7 +278,7 @@ namespace Usuarios.Presentacion
                 }
             }
             // Valores
-            for (int i = 0; i < dgvUsuarios.Rows.Count - 1; i++)
+            for (int i = 0; i < dgvUsuarios.Rows.Count; i++)
             {
                 for (int j = 0; j < dgvUsuarios.Columns.Count; j++)
                 {
@@ -285,30 +305,31 @@ namespace Usuarios.Presentacion
 
         private void txtFiltroNombre_TextChanged(object sender, EventArgs e)
         {
-            dgvUsuarios.DataSource = operaciones.FiltrarNombre(txtFiltroNombre.Text);
+            dgvUsuarios.DataSource = usuariosN.FiltrarNombre(txtFiltroNombre.Text);
         }
 
         private void txtFiltroApellido_TextChanged(object sender, EventArgs e)
         {
-            dgvUsuarios.DataSource = operaciones.FiltrarApellido(txtFiltroApellido.Text);
+            dgvUsuarios.DataSource = usuariosN.FiltrarApellido(txtFiltroApellido.Text);
         }
 
         private void txtFiltroNumDoc_TextChanged(object sender, EventArgs e)
         {
-            dgvUsuarios.DataSource = operaciones.FiltrarNumDocumento(txtFiltroNumDoc.Text);
+            dgvUsuarios.DataSource = usuariosN.FiltrarNumDocumento(txtFiltroNumDoc.Text);
         }
 
-       
+
         private void txtNumDocumento_KeyPress(object sender, KeyPressEventArgs e)
         {
-            bool valida=Validador.SoloNumeros(e);
-            if(!valida)
+            bool valida = Validador.SoloNumeros(e);
+            if (!valida)
             {
                 errorProvider.SetError(txtNumDocumento, "Unicamente numeros");
             }
             else
             {
                 errorProvider.Clear();
+                
             }
         }
 
@@ -322,6 +343,7 @@ namespace Usuarios.Presentacion
             else
             {
                 errorProvider.Clear();
+                
             }
         }
 
@@ -334,7 +356,7 @@ namespace Usuarios.Presentacion
             }
             else
             {
-                errorProvider.Clear();
+                errorProvider.Clear();               
             }
         }
 
@@ -347,7 +369,7 @@ namespace Usuarios.Presentacion
             }
             else
             {
-                errorProvider.Clear();
+                errorProvider.Clear();               
             }
         }
 
@@ -356,10 +378,14 @@ namespace Usuarios.Presentacion
             if (Validador.TextBoxVacios(txtNombre))
             {
                 errorProvider.SetError(txtNombre, "No puede estar vacio.");
+                BtnGuardar.Enabled = false;               
             }
             else
             {
                 errorProvider.Clear();
+                BtnGuardar.Enabled = true;
+                BtnGuardar.Cursor = Cursors.Hand;
+
             }
         }
 
@@ -368,10 +394,13 @@ namespace Usuarios.Presentacion
             if (Validador.TextBoxVacios(txtApellidos))
             {
                 errorProvider.SetError(txtApellidos, "No puede estar vacio.");
+                BtnGuardar.Enabled = false;
             }
             else
             {
                 errorProvider.Clear();
+                BtnGuardar.Enabled = true;
+                BtnGuardar.Cursor = Cursors.Hand;
             }
         }
 
@@ -380,10 +409,13 @@ namespace Usuarios.Presentacion
             if (Validador.TextBoxVacios(txtNumDocumento))
             {
                 errorProvider.SetError(txtNumDocumento, "No puede estar vacio.");
+                BtnGuardar.Enabled = false;
             }
             else
             {
                 errorProvider.Clear();
+                BtnGuardar.Enabled = true;
+                BtnGuardar.Cursor = Cursors.Hand;
             }
         }
 
@@ -392,10 +424,13 @@ namespace Usuarios.Presentacion
             if (Validador.TextBoxVacios(txtDireccion))
             {
                 errorProvider.SetError(txtDireccion, "No puede estar vacio.");
+                BtnGuardar.Enabled = false;
             }
             else
             {
                 errorProvider.Clear();
+                BtnGuardar.Enabled = true;
+                BtnGuardar.Cursor = Cursors.Hand;
             }
         }
 
@@ -404,10 +439,13 @@ namespace Usuarios.Presentacion
             if (Validador.TextBoxVacios(txtTelefono))
             {
                 errorProvider.SetError(txtTelefono, "No puede estar vacio.");
+                BtnGuardar.Enabled = false;
             }
             else
             {
                 errorProvider.Clear();
+                BtnGuardar.Enabled = true;
+                BtnGuardar.Cursor = Cursors.Hand;
             }
         }
 
@@ -416,10 +454,13 @@ namespace Usuarios.Presentacion
             if (Validador.TextBoxVacios(txtCelular))
             {
                 errorProvider.SetError(txtCelular, "No puede estar vacio.");
+                BtnGuardar.Enabled = false;
             }
             else
             {
                 errorProvider.Clear();
+                BtnGuardar.Enabled = true;
+                BtnGuardar.Cursor = Cursors.Hand;
             }
         }
 
@@ -428,11 +469,14 @@ namespace Usuarios.Presentacion
             if (!Validador.ValidarCorreo(txtCorreo.Text))
             {
                 errorProvider.SetError(txtCorreo, "Correo no válido.");
+                BtnGuardar.Enabled = false;
             }
             else
             {
                 errorProvider.Clear();
-            }           
+                BtnGuardar.Enabled = true;
+                BtnGuardar.Cursor = Cursors.Hand;
+            }
         }
 
         private void txtOcupacion_Leave(object sender, EventArgs e)
@@ -441,10 +485,13 @@ namespace Usuarios.Presentacion
             if (Validador.TextBoxVacios(txtOcupacion))
             {
                 errorProvider.SetError(txtOcupacion, "No puede estar vacio.");
+                BtnGuardar.Enabled = false;
             }
             else
             {
                 errorProvider.Clear();
+                BtnGuardar.Enabled = true;
+                BtnGuardar.Cursor = Cursors.Hand;
             }
         }
     }
